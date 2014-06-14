@@ -212,6 +212,7 @@
     <Content Include="scripts\vendor\json3.min.js" />
     <Content Include="styles\main.css" />
     <Content Include="views\main.html" />
+    <Content Include="views\partials\groupManagmentPartial.html" />
     <Content Include="views\partials\loginPartial.html" />
     <Content Include="views\partials\reportsPartial.html" />
     <Content Include="Web.config">

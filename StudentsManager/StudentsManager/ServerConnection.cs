@@ -13,6 +13,8 @@ namespace StudentsManager
     {
 
         private StudentsRepository _repository = new StudentsRepository();
+        private GroupsRepository _groups = new GroupsRepository();
+
 
         public async Task<string[]> HelloWorld()
         {
@@ -63,6 +65,46 @@ namespace StudentsManager
 
             return data;
         }
+
+
+        /*GROUPS*/
+        public async Task UnassignUser(string groupName, string userName)
+        {
+            _groups.UnassignUser(groupName, userName);
+        }
+        public async Task AssignUser(string groupName, string userName)
+        {
+            _groups.AssignUser(groupName, userName);
+        }
+        public async Task CreateGroup(string groupName)
+        {
+            _groups.CreateGroup(groupName);
+        }
+        public async Task<GroupAssignList> GetAssignStatusForGroup(string groupName)
+        {
+            GroupAssignList list = null;
+
+            await Task.Run(() => 
+            {
+                list = _groups.GetGroupAssignList(groupName);
+            });
+
+            return list;
+        }
+        public async Task<string[]> GetGroups()
+        {
+            string[] groups = null;
+
+            await Task.Run(() =>
+            {
+                groups = _groups.GetAvalableGroups();
+            });
+
+            return groups;
+        }
+
+
+
 
        
     }
