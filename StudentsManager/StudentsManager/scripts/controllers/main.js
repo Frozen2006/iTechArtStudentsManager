@@ -5,6 +5,10 @@ iTechArtStudentsManagerApp.controller('MainCtrl', ['$rootScope', 'hubProvider', 
         value: ''
     };
 
+    $scope.selected = {
+        value: ''
+    };
+
     $scope.$watch('isAuthentificated.value', function (newValue, oldValue) {
         if (newValue !== oldValue) {
             $scope.isAuthentificated.value = newValue;

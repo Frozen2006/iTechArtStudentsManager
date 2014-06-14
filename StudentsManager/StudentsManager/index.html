@@ -34,7 +34,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">iTechArt Students Manager</a>
+                <a class="navbar-brand" ng-click="selected.value=''" href="/">iTechArt Students Manager</a>
             </div>
             <div ng-controller="MainCtrl">
                 <div ng-show="isAuthentificated.value">
@@ -105,16 +105,16 @@
     <script type="text/ng-template" id="menuTemplate.html">
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li ng-init="selected=''" ng-click="selected='first'" ng-class="(selected == 'first') ? 'active' : ''" id="first">
+                <li ng-click="selected.value='first'" ng-class="(selected.value == 'first') ? 'active' : ''" id="first">
                     <a href="/Rating">Rating</a>
                 </li>
-                <li ng-init="selected=''" ng-click="selected='second'" ng-class="(selected === 'second') ? 'active' : ''" id="second">
+                <li ng-click="selected.value='second'" ng-class="(selected.value === 'second') ? 'active' : ''" id="second">
                     <a href="/Reports">Reports</a>
                 </li>
-                <li ng-init="selected=''" ng-click="selected='third'" ng-class="(selected === 'third') ? 'active' : ''" id="third">
+                <li ng-click="selected.value='third'" ng-class="(selected.value === 'third') ? 'active' : ''" id="third">
                     <a href="/GroupsManagment">GroupsManagment</a>
                 </li>
-                <li ng-init="selected=''" ng-click="selected='forth'" ng-class="(selected === 'forth') ? 'active' : ''" id="forth">
+                <li ng-click="selected.value='forth'" ng-class="(selected.value === 'forth') ? 'active' : ''" id="forth">
                     <a href="/TaskManagment">Task bank</a>
                 </li>
                 <li>
