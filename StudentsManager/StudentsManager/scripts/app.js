@@ -23,15 +23,20 @@ var iTechArtStudentsManagerApp = angular.module('iTechArtStudentsManagerApp', ['
           templateUrl: 'views/partials/groupManagmentPartial.html',
           controller: 'GroupsManagmentController'
       })
-      .when('/TaskManagment', {
-          templateUrl: 'views/partials/taskBankPartial.html',
-          controller: 'TaskBankController'
-      })
-          .otherwise({
-              redirectTo: '/'
-          });
+     .when('/Rating', {
+         templateUrl: 'views/partials/ratingPartial.html',
+         controller: 'RatingCtrl'
+     })
+    .when('/TaskManagment', {
+        templateUrl: 'views/partials/taskBankPartial.html',
+        controller: 'TaskBankController'
+    })
+    .otherwise({
+        redirectTo: '/'
+    });
         $locationProvider.html5Mode(true);
     }]);
+
 
 
 iTechArtStudentsManagerApp.provider('hubProvider', function () {
