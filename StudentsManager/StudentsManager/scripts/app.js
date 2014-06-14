@@ -58,16 +58,27 @@ iTechArtStudentsManagerApp.provider('hubProvider', function () {
                 self.init();
             },
             call: function (hubName, methodName, params) {
-                var deffered = new $.Deffered();
+                var deffered = $.Deferred();
 
                 if (typeof connection !== 'undefined') {
-                    return connection[hubName].client[methodName](params);
+                    if (params) {
+                        return $.connection[hubName].server[methodName](params);
+                    } else {
+                        return $.connection[hubName].server[methodName]();
+                    }
+                    
                 };
 
                 self.init(function () {
-                    connection[hubName].client[methodName](params).done(function (data) {
-                        deffered.resolve(data);
-                    });
+                    if (params) {
+                        $.connection[hubName].server[methodName](params).done(function (data) {
+                            deffered.resolve(data);
+                        });
+                    } else {
+                        $.connection[hubName].server[methodName]().done(function (data) {
+                            deffered.resolve(data);
+                        });
+                    }
                 });
 
                 return deffered.promise;
