@@ -61,7 +61,7 @@ iTechArtStudentsManagerApp.controller('ReportsController', ['$scope', 'hubProvid
 
     };
 
-    hubProvider.call('serverConnection', 'getStudents', null).done(function (data) {
+    hubProvider.call('serverConnection', 'getStudents', 'tt1', 'tt22').done(function (data) {
         $scope.students = data;
         $scope.$apply();
     });
