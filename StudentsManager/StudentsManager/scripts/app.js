@@ -1,6 +1,6 @@
 'use strict';
 
-var sampleYeomanAppApp = angular.module('sampleYeomanAppApp', []).config(['$routeProvider', function ($routeProvider) {
+var iTechArtStudentsManagerApp = angular.module('iTechArtStudentsManagerApp', []).config(['$routeProvider', function ($routeProvider) {
     $routeProvider
       .when('/', {
           templateUrl: 'views/main.html',
@@ -12,7 +12,7 @@ var sampleYeomanAppApp = angular.module('sampleYeomanAppApp', []).config(['$rout
 }]);
 
 
-sampleYeomanAppApp.provider('hubProvider', function () {
+iTechArtStudentsManagerApp.provider('hubProvider', function () {
     var connection;
     var self = this;
 

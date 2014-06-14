@@ -1,6 +1,6 @@
 'use strict';
 
-sampleYeomanAppApp.controller('MainCtrl', ['$scope', 'hubProvider', function ($scope, hubProvider) {
+iTechArtStudentsManagerApp.controller('MainCtrl', ['$scope', 'hubProvider', function ($scope, hubProvider) {
 
   $scope.awesomeThings = [
     'HTML5 Boilerplate',
