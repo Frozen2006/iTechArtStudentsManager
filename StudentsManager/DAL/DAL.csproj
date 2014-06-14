@@ -67,6 +67,7 @@
     <Compile Include="Entities\Task.cs" />
     <Compile Include="Entities\TaskStudent.cs" />
     <Compile Include="Entities\UserGroup.cs" />
+    <Compile Include="GroupsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StudentsManagerDbContext.cs" />
     <Compile Include="StudentsRepository.cs" />

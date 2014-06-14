@@ -185,6 +185,7 @@
     <Content Include="Register.aspx" />
     <Content Include="robots.txt" />
     <Content Include="scripts\app.js" />
+    <Content Include="scripts\controllers\groupsManagment.js" />
     <Content Include="scripts\controllers\login.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />

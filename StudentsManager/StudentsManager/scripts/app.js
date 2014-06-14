@@ -11,8 +11,12 @@ var iTechArtStudentsManagerApp = angular.module('iTechArtStudentsManagerApp', ['
           controller: 'LoginCtrl'
       })
       .when('/Reports', {
-                  templateUrl: 'views/partials/reportsPartial.html',
-                  controller: 'ReportsController'
+          templateUrl: 'views/partials/reportsPartial.html',
+          controller: 'ReportsController'
+      })
+      .when('/GroupsManagment', {
+          templateUrl: 'views/partials/groupManagmentPartial.html',
+          controller: 'GroupsManagmentController'
       })
       .otherwise({
           redirectTo: '/'
@@ -37,7 +41,7 @@ iTechArtStudentsManagerApp.provider('hubProvider', function () {
 
     this.$get = function () {
         return {
-            init: function(callback) {
+            init: function (callback) {
                 self.init(callback);
             },
             callbacks: {
@@ -58,7 +62,7 @@ iTechArtStudentsManagerApp.provider('hubProvider', function () {
                 self.init();
             },
             call: function (hubName, methodName, params) {
-                var deffered = $.Deferred();
+                var deffered = new $.Deferred;
 
                 var argsForExternal = [];
                 for (var i = 2; i < arguments.length; i++) {
@@ -71,7 +75,7 @@ iTechArtStudentsManagerApp.provider('hubProvider', function () {
                     } else {
                         return $.connection[hubName].server[methodName]();
                     }
-                    
+
                 };
 
                 self.init(function () {
@@ -86,7 +90,7 @@ iTechArtStudentsManagerApp.provider('hubProvider', function () {
                     }
                 });
 
-                return deffered.promise;
+                return deffered.promise();
             }
         };
     };

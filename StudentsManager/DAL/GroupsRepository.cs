@@ -24,6 +24,7 @@ namespace DAL
             {
                 Assigned = group.
             };*/
+            return new GroupAssignList();
         }
 
         public void CreateGroup(string groupName)

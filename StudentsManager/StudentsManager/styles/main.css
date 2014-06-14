@@ -5,3 +5,9 @@
 .list-group {
     margin-bottom: 0 !important;
 }
+
+.categoruItem {
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+}
