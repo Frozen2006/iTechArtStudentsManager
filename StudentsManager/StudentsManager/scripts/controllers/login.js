@@ -3,12 +3,14 @@
     $scope.pass = '';
     $scope.message = ''
 
+    var serviceUrl = "AjaxWebService.asmx";
+
     $scope.authenticate = function () {
         console.log('Auth with' + $scope.login + ' ' + $scope.pass);
-        var url = "AjaxWebService.asmx";
+        
         $.ajax({
             type: "POST",
-            url: url + "/Login",
+            url: serviceUrl + "/Login",
             data: "{'username':'" + $scope.login + "', 'passwordHash':'" + $scope.pass + "'}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -22,7 +24,7 @@
                     authProvider.authorize();
                     $location.path("/");
 
-                    console.log('Authenticated...');
+                    getRoleName();
                 } else {
                     $scope.message = 'Authentication failed.';
                     $scope.$apply();
@@ -37,5 +39,25 @@
            
         });
 
+
+
     }
+
+    var getRoleName = function () {
+        $.ajax({
+            type: "POST",
+            url: serviceUrl + "/GetRoleName",
+            data: "{}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function OnSuccessCall(responseJson) {
+                $scope.roleName = '';
+            },
+            error: function OnErrorCall(response) {
+                $scope.message = $scope.message + 'Error getting role';
+            }
+
+        });
+
+    };
 }]);
