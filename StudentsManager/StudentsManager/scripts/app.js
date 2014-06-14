@@ -1,11 +1,12 @@
 'use strict';
 
-var iTechArtStudentsManagerApp = angular.module('iTechArtStudentsManagerApp', ['chartjs-directive']).config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
-    $routeProvider
-      .when('/', {
-          templateUrl: 'views/main.html',
-          controller: 'MainCtrl'
-      })
+var iTechArtStudentsManagerApp = angular.module('iTechArtStudentsManagerApp', ['chartjs-directive', 'ui.bootstrap', 'ngRoute', 'ui.tinymce', 'ngSanitize'])
+    .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+        $routeProvider
+       .when('/', {
+           templateUrl: 'views/main.html',
+           controller: 'MainCtrl'
+       })
       .when('/Login', {
           templateUrl: 'views/partials/loginPartial.html',
           controller: 'LoginCtrl'
@@ -26,11 +27,16 @@ var iTechArtStudentsManagerApp = angular.module('iTechArtStudentsManagerApp', ['
          templateUrl: 'views/partials/ratingPartial.html',
          controller: 'RatingCtrl'
      })
-      .otherwise({
-          redirectTo: '/'
-      });
-    $locationProvider.html5Mode(true);
-}]);
+    .when('/TaskManagment', {
+        templateUrl: 'views/partials/taskBankPartial.html',
+        controller: 'TaskBankController'
+    })
+    .otherwise({
+        redirectTo: '/'
+    });
+        $locationProvider.html5Mode(true);
+    }]);
+
 
 
 iTechArtStudentsManagerApp.provider('hubProvider', function () {

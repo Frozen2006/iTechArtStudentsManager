@@ -10,7 +10,7 @@ namespace DAL
 {
     public class GroupsRepository
     {
-        StudentsManagerDbContext _context = new StudentsManagerDbContext();
+        StudentsManagerDbContext _context = StudentsManagerDbContext.GetInstance();
 
 
         public string[] GetAvalableGroups()
@@ -21,14 +21,23 @@ namespace DAL
         public GroupAssignList GetGroupAssignList(string groupName)
         {
             var group = _context.Groups.FirstOrDefault(m=>m.Name == groupName);
+
+            var assignedEntities = group.Members.ToArray();
+            var assigned = assignedEntities.Select(m => new AppUserData()
+            { 
+                    UserName = m.UserName, 
+                    LastAndFirstName = m.FirstName+' '+m.LastName }).ToArray();
+
+            var unassigned1 = _context.Users.Where(m => !assignedEntities.Contains(m)).ToList();
+
+            var unassigned = unassigned1.Select(m=> new AppUserData() { 
+                    UserName = m.UserName, 
+                    LastAndFirstName = m.FirstName+' '+m.LastName }).ToArray();
+
             return new GroupAssignList()
             {
-                Assigned = group.Members.Select(m=> new AppUserData() { 
-                    UserName = m.UserName, 
-                    LastAndFirstName = m.FirstName+' '+m.LastName }).ToArray(),
-                Unassigned = _context.Users.Where(m=> !m.Groups.Contains(group)).Select(m=> new AppUserData() { 
-                    UserName = m.UserName, 
-                    LastAndFirstName = m.FirstName+' '+m.LastName }).ToArray()
+                Assigned = assigned,
+                Unassigned = unassigned
             };
         }
 

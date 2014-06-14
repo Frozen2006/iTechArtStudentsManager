@@ -10,7 +10,7 @@ namespace DAL
 {
     public class StudentsRepository
     {
-        StudentsManagerDbContext context = new StudentsManagerDbContext();
+        StudentsManagerDbContext context = StudentsManagerDbContext.GetInstance();
 
 
 
