@@ -1,14 +1,19 @@
 'use strict';
 
-var iTechArtStudentsManagerApp = angular.module('iTechArtStudentsManagerApp', []).config(['$routeProvider', function ($routeProvider) {
+var iTechArtStudentsManagerApp = angular.module('iTechArtStudentsManagerApp', []).config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     $routeProvider
       .when('/', {
           templateUrl: 'views/main.html',
           controller: 'MainCtrl'
       })
+      .when('/Login', {
+          templateUrl: 'views/partials/loginPartial.html',
+          controller: 'LoginCtrl'
+      })
       .otherwise({
           redirectTo: '/'
       });
+    $locationProvider.html5Mode(true);
 }]);
 
 
