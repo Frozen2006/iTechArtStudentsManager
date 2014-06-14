@@ -47,7 +47,8 @@ iTechArtStudentsManagerApp.controller('RatingCtrl', ['$scope', 'hubProvider', '$
             };
             $scope.$apply();
         };
-        
+      //  $scope.ratings = [{ UserName: 'asjfa', Mark: 7.0 }, { UserName: 'ureytl', Mark: 6.5 }];
+        $scope.sorter.info = $scope.ratings;
     };
 
     var getStudentMarks = function (studentName) {
@@ -69,5 +70,5 @@ iTechArtStudentsManagerApp.controller('RatingCtrl', ['$scope', 'hubProvider', '$
         return sum / marksAmount;
     };
 
-    $scope.headers = [{ name: 'User name' }, {name: 'Average mark'}];
+    $scope.headers = [{ name: 'User name', field: 'UserName' }, {name: 'Average mark', field: 'Mark'}];
 }]);
