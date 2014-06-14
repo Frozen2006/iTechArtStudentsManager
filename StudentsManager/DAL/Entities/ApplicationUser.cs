@@ -20,10 +20,9 @@ namespace DAL.Entities
         public Nullable<int> Student { get; set; }
 
 
-        public virtual ICollection<UserGroup> UserGroups { get; set; }
         public virtual ICollection<Lection> Lections { get; set; }
-        public virtual ICollection<NotificationReceivers> NotificationReceivers { get; set; }
-        public virtual ICollection<NotificationSenders> NotificationSenders { get; set; }
-        
+        public virtual ICollection<Group> Groups { get; set; }
+        public virtual ICollection<Notification> Notifications { get; set; }
+        public virtual ICollection<Notification> SentNotifications { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace DAL.Entities
         public Lection()
         {
             this.Files = new HashSet<File>();
-            this.LectionGroups = new HashSet<LectionGroup>();
+            this.Groups = new HashSet<Group>();
         }
     
         public int Id { get; set; }
@@ -27,6 +27,6 @@ namespace DAL.Entities
     
         public virtual ICollection<File> Files { get; set; }
         public virtual ApplicationUser Creator { get; set; }
-        public virtual ICollection<LectionGroup> LectionGroups { get; set; }
+        public virtual ICollection<Group> Groups { get; set; }
     }
 }
