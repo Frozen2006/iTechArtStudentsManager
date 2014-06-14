@@ -1,0 +1,25 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">Task assign</h3>
+</div>
+<div class="modal-body">
+    <form>
+        <span class="help-block">Task name: <b ng-bind="taskInfo.Title">tst</b></span><span class="help-block">Task level: <b ng-bind="taskInfo.Level">10</b></span>
+        <div class="form-group">
+            <label class="control-label">Student:</label>
+            <div class="controls">
+                <select class="form-control">
+                    <option>Option 1</option>
+                    <option>Option 2</option>
+                    <option>Option 3</option>
+                </select>
+            </div>
+        </div>
+    </form>
+
+    <hr />
+    <p class="validationMessage-modal" ng-show="isErrorVisible">Invalid data</p>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">Assign</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

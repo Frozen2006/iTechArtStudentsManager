@@ -1,0 +1,39 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">New task</h3>
+</div>
+<div class="modal-body">
+    <form>
+        <div class="form-group">
+            <label class="control-label">Task name</label>
+            <div class="controls">
+                <input type="text" class="form-control" ng-model="currentTask.title">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Task tag</label>
+            <div class="controls">
+                <input type="text" class="form-control" ng-model="currentTask.tag">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Complex level</label>
+            <div class="controls">
+                <input type="text" class="form-control" ng-model="currentTask.complexLevel">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="control-label">Task content</label>
+            <div class="controls">
+                <textarea ui-tinymce class="form-control" ng-model="currentTask.content" style="min-height: 350px;"></textarea>
+            </div>
+        </div>
+    </form> 
+
+    <hr/>
+    <p class="validationMessage-modal" ng-show="isErrorVisible">Invalid data</p>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">Create</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>
