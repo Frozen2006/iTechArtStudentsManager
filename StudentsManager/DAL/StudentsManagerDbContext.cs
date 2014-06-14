@@ -13,7 +13,6 @@ namespace DAL
 {
     public class StudentsManagerDbContext : IdentityDbContext<ApplicationUser>
     {
-        public virtual IDbSet<ApplicationUser> ApplicationUsers { get; set; }
         public virtual IDbSet<Comment> Comments { get; set; }
         public virtual IDbSet<File> Files { get; set; }
         public virtual IDbSet<Group> Groups { get; set; }
