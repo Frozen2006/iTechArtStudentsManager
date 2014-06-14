@@ -13,13 +13,17 @@ namespace DAL
         StudentsManagerDbContext context = new StudentsManagerDbContext();
 
 
-        public AppUserData[] GetUsersNamesList()
+
+
+        public AppUserData[] GetStudentsNamesList()
         {
-            return context.Users.Select(m => new  AppUserData()
-            {
-                LastAndFirstName = m.FirstName +" " + m.LastName,
-                UserName = m.UserName
-            }).ToArray();
+             var ids = context.Roles.FirstOrDefault(m => m.Name == "Student").Users.Select(m=>m.UserId);
+
+                return context.Users.Where(m=>ids.Contains(m.Id)).Select(m => new  AppUserData()
+                {
+                    LastAndFirstName = m.FirstName +" " + m.LastName,
+                    UserName = m.UserName
+                }).ToArray();
         }
 
         public StudentMark[] GetStudentsMarks(string userName)

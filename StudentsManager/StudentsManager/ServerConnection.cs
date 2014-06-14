@@ -57,7 +57,7 @@ namespace StudentsManager
             AppUserData[] data = null;
             await Task.Run(() =>
             {
-               data = _repository.GetUsersNamesList();
+               data = _repository.GetStudentsNamesList();
 
             });
 

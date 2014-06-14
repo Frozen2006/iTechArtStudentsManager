@@ -28,8 +28,8 @@ namespace DAL
         public StudentsManagerDbContext()
             : base("StudentsManagerDb")
         {
-            Database.SetInitializer<StudentsManagerDbContext>(new CreateDatabaseIfNotExists< StudentsManagerDbContext>() );
-            
+            Database.SetInitializer<StudentsManagerDbContext>(new DBCustomInitializer());
+            Database.Initialize(false);
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
