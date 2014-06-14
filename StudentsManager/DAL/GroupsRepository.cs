@@ -22,13 +22,13 @@ namespace DAL
         {
             var group = _context.Groups.FirstOrDefault(m=>m.Name == groupName);
 
-            var assignedEntities = group.Members.ToArray();
+            var assignedEntities = group.Members.ToArray().Where(m => IsInRole(m, "Student"));
             var assigned = assignedEntities.Select(m => new AppUserData()
             { 
                     UserName = m.UserName, 
                     LastAndFirstName = m.FirstName+' '+m.LastName }).ToArray();
 
-            var unassigned1 = _context.Users.Where(m => !assignedEntities.Contains(m)).ToList();
+            var unassigned1 = _context.Users.ToList().Where(m => !assignedEntities.Contains(m)).ToList().Where(m=> IsInRole(m, "Student"));
 
             var unassigned = unassigned1.Select(m=> new AppUserData() { 
                     UserName = m.UserName, 
@@ -53,6 +53,10 @@ namespace DAL
             _context.SaveChanges();
         }
 
+        private bool IsInRole(ApplicationUser user, string role)
+        {
+            return _context.Roles.FirstOrDefault(m => m.Name == role).Users.Where(m => m.UserId == user.Id).Count() > 0;
+        }
 
         public void UnassignUser(string groupName, string userName)
         {

@@ -91,5 +91,12 @@ namespace DAL
 
             context.SaveChanges();
         }
+
+
+        public StudentMark[] GetUserMarks(string userName)
+        {
+            return context.TaskStudents.Where(m => m.Student.UserName == userName).ToArray().
+                Where(m=>m.Mark != null).Select(m => new StudentMark() { Tag = m.Task.Tags, Mark = (int)m.Mark }).ToArray();
+        }
     }
 }

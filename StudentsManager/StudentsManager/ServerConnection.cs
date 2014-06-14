@@ -33,25 +33,15 @@ namespace StudentsManager
         Random rand = new Random();
         public async Task<StudentMark[]> GetStudentMarks(string studentName)
         {
-            List<StudentMark> marks = new List<StudentMark>();
+            StudentMark[] marks = null;
 
             await Task.Run(() =>
             {
-                for (int i = 0; i < 10; i++)
-                {
-                    var model = new StudentMark()
-                    {
-                        Tag = "JS",
-                        Mark = rand.Next(1, 10)
-                    };
-
-                    marks.Add(model);
-                }
-
+                marks = _tasks.GetUserMarks(studentName);
             });
 
 
-            return marks.ToArray();
+            return marks;
         }
 
         public async Task<AppUserData[]> GetStudents()

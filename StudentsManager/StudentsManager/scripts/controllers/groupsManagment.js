@@ -17,7 +17,7 @@ iTechArtStudentsManagerApp.controller('GroupsManagmentController', ['$scope', 'h
 
 
     $scope.unassingn = function (user) {
-        hubProvider.call('serverConnection', 'unassignUser', groupName, user.UserName);
+        hubProvider.call('serverConnection', 'unassignUser', $scope.currentGroup, user.UserName);
 
         $scope.currentAssignedUsers = $.map($scope.currentAssignedUsers, function (el) {
             if (el !== user) {
@@ -31,7 +31,7 @@ iTechArtStudentsManagerApp.controller('GroupsManagmentController', ['$scope', 'h
     };
 
     $scope.assingn = function (user) {
-        hubProvider.call('serverConnection', 'assignUser', groupName, user.UserName);
+        hubProvider.call('serverConnection', 'assignUser', $scope.currentGroup, user.UserName);
 
         $scope.currentUnassignedUsers = $.map($scope.currentUnassignedUsers, function (el) {
             if (el !== user) {
