@@ -10,6 +10,10 @@ var iTechArtStudentsManagerApp = angular.module('iTechArtStudentsManagerApp', []
           templateUrl: 'views/partials/loginPartial.html',
           controller: 'LoginCtrl'
       })
+        .when('/Home', {
+            templateUrl: 'views/partials/homePartial.html',
+            controller:'MainCtrl'
+        })
       .otherwise({
           redirectTo: '/'
       });
@@ -52,6 +56,28 @@ iTechArtStudentsManagerApp.provider('hubProvider', function () {
             },
             reInit: function () {
                 self.init();
+            }
+        };
+    };
+});
+
+iTechArtStudentsManagerApp.provider('AuthProvider', function () {
+    var isAuthorized = false;
+    var self = this;
+
+    this.$get = function () {
+        return {
+            isAuthorized: function(){
+                return isAuthorized;
+            },
+            authorize: function () {
+                isAuthorized = true;
+            },
+            logOut: function () {
+                isAuthorized = false;
+            },
+            subscribe: function (callback) {
+
             }
         };
     };
