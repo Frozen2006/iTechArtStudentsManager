@@ -1,0 +1,29 @@
+﻿<div class="row">
+    <div class="col-md-3">
+        <h2>Rating</h2>
+        <button ng-click="showRating()">Show</button>
+        <ul class="list-group" ng-repeat="rating in ratings">
+            <li>{{rating.UserName}} - {{rating.Mark}}</li>
+        </ul>
+    </div>
+
+
+    <table class="table table-striped">
+        <caption>Rating</caption>
+        <thead>
+        <th>#</th>
+        <th ng-repeat="header in headers">{{header.name}}&nbsp;<a><i ng-sort="header.field" sort-target="sorter.sortable" sort-value="sorter.baseField" class="glyphicon glyphicon-sort"></i></a></th>
+        <th></th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="rating in ratings = (sorter.sortable | startFrom:itemsPerPage*(currentPage - 1) | limitTo:itemsPerPage)">
+                <td>{{$index+1}}</td>
+                <td>{{rating.UserName}}</td>
+                <td>{{rating.Mark}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <!--<div class="centered">
+        <pagination total-items="totalItems" items-per-page="itemsPerPage" page="$parent.currentPage" max-size="maxSize" class="pagination" boundary-links="true" rotate="false" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+    </div>-->
+

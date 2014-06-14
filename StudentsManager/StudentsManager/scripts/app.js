@@ -22,6 +22,10 @@ var iTechArtStudentsManagerApp = angular.module('iTechArtStudentsManagerApp', ['
           templateUrl: 'views/partials/groupManagmentPartial.html',
           controller: 'GroupsManagmentController'
       })
+     .when('/Rating', {
+         templateUrl: 'views/partials/ratingPartial.html',
+         controller: 'RatingCtrl'
+     })
       .otherwise({
           redirectTo: '/'
       });
