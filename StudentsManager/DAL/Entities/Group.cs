@@ -16,15 +16,15 @@ namespace DAL.Entities
     {
         public Group()
         {
-            this.UserGroups = new HashSet<UserGroup>();
-            this.LectionGroups = new HashSet<LectionGroup>();
+            this.Members = new HashSet<ApplicationUser>();
+            this.Lections = new HashSet<Lection>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
         public string Schedule { get; set; }
-    
-        public virtual ICollection<UserGroup> UserGroups { get; set; }
-        public virtual ICollection<LectionGroup> LectionGroups { get; set; }
+
+        public virtual ICollection<ApplicationUser> Members { get; set; }
+        public virtual ICollection<Lection> Lections { get; set; }
     }
 }

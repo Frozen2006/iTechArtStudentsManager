@@ -16,13 +16,13 @@ namespace DAL.Entities
     {
         public Notification()
         {
-            this.NotificationReceivers = new HashSet<NotificationReceivers>();
+            this.Receivers = new HashSet<ApplicationUser>();
         }
     
         public int Id { get; set; }
         public string Content { get; set; }
-    
-        public virtual ICollection<NotificationReceivers> NotificationReceivers { get; set; }
-        public virtual NotificationSenders NotificationSender { get; set; }
+
+        public virtual ICollection<ApplicationUser> Receivers { get; set; }
+        public virtual ApplicationUser Sender { get; set; }
     }
 }
