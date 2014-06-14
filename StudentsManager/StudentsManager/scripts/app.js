@@ -1,6 +1,6 @@
 'use strict';
 
-var iTechArtStudentsManagerApp = angular.module('iTechArtStudentsManagerApp', []).config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+var iTechArtStudentsManagerApp = angular.module('iTechArtStudentsManagerApp', ['chartjs-directive']).config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     $routeProvider
       .when('/', {
           templateUrl: 'views/main.html',
@@ -9,6 +9,10 @@ var iTechArtStudentsManagerApp = angular.module('iTechArtStudentsManagerApp', []
       .when('/Login', {
           templateUrl: 'views/partials/loginPartial.html',
           controller: 'LoginCtrl'
+      })
+      .when('/Reports', {
+                  templateUrl: 'views/partials/reportsPartial.html',
+                  controller: 'ReportsController'
       })
       .otherwise({
           redirectTo: '/'
@@ -52,6 +56,21 @@ iTechArtStudentsManagerApp.provider('hubProvider', function () {
             },
             reInit: function () {
                 self.init();
+            },
+            call: function (hubName, methodName, params) {
+                var deffered = new $.Deffered();
+
+                if (typeof connection !== 'undefined') {
+                    return connection[hubName].client[methodName](params);
+                };
+
+                self.init(function () {
+                    connection[hubName].client[methodName](params).done(function (data) {
+                        deffered.resolve(data);
+                    });
+                });
+
+                return deffered.promise;
             }
         };
     };
