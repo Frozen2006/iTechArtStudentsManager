@@ -1,28 +1,33 @@
 'use strict';
 
-var iTechArtStudentsManagerApp = angular.module('iTechArtStudentsManagerApp', ['chartjs-directive']).config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
-    $routeProvider
-      .when('/', {
-          templateUrl: 'views/main.html',
-          controller: 'MainCtrl'
-      })
-      .when('/Login', {
-          templateUrl: 'views/partials/loginPartial.html',
-          controller: 'LoginCtrl'
-      })
-      .when('/Reports', {
-          templateUrl: 'views/partials/reportsPartial.html',
-          controller: 'ReportsController'
-      })
-      .when('/GroupsManagment', {
-          templateUrl: 'views/partials/groupManagmentPartial.html',
-          controller: 'GroupsManagmentController'
-      })
-      .otherwise({
-          redirectTo: '/'
-      });
-    $locationProvider.html5Mode(true);
-}]);
+var iTechArtStudentsManagerApp = angular.module('iTechArtStudentsManagerApp', ['chartjs-directive', 'ui.bootstrap', 'ngRoute', 'ui.tinymce', 'ngSanitize'])
+    .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+        $routeProvider
+          .when('/', {
+              templateUrl: 'views/main.html',
+              controller: 'MainCtrl'
+          })
+          .when('/Login', {
+              templateUrl: 'views/partials/loginPartial.html',
+              controller: 'LoginCtrl'
+          })
+          .when('/Reports', {
+              templateUrl: 'views/partials/reportsPartial.html',
+              controller: 'ReportsController'
+          })
+          .when('/GroupsManagment', {
+              templateUrl: 'views/partials/groupManagmentPartial.html',
+              controller: 'GroupsManagmentController'
+          })
+         .when('/TaskManagment', {
+             templateUrl: 'views/partials/taskBankPartial.html',
+             controller: 'TaskBankController'
+         })
+          .otherwise({
+              redirectTo: '/'
+          });
+        $locationProvider.html5Mode(true);
+    }]);
 
 
 iTechArtStudentsManagerApp.provider('hubProvider', function () {

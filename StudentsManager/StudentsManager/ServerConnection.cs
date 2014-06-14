@@ -14,7 +14,7 @@ namespace StudentsManager
 
         private StudentsRepository _repository = new StudentsRepository();
         private GroupsRepository _groups = new GroupsRepository();
-
+        private TaskRepository _tasks = new TaskRepository();
 
         public async Task<string[]> HelloWorld()
         {
@@ -37,7 +37,7 @@ namespace StudentsManager
 
             await Task.Run(() =>
             {
-                for(int i=0; i<10; i++)
+                for (int i = 0; i < 10; i++)
                 {
                     var model = new StudentMark()
                     {
@@ -59,7 +59,7 @@ namespace StudentsManager
             AppUserData[] data = null;
             await Task.Run(() =>
             {
-               data = _repository.GetStudentsNamesList();
+                data = _repository.GetStudentsNamesList();
 
             });
 
@@ -84,7 +84,7 @@ namespace StudentsManager
         {
             GroupAssignList list = null;
 
-            await Task.Run(() => 
+            await Task.Run(() =>
             {
                 list = _groups.GetGroupAssignList(groupName);
             });
@@ -104,8 +104,50 @@ namespace StudentsManager
         }
 
 
+        public async Task<TagsList[]> GetTaskList()
+        {
+            TagsList[] list = null;
+            await Task.Run(() =>
+            {
+                list = _tasks.GetTaskList();
+            });
+
+            return list;
+        }
+
+        public async Task<string> GetTaskText(string title, string tag)
+        {
+            string content = null;
+
+            await Task.Run(() =>
+            {
+                content = _tasks.GetTaskContent(title, tag);
+            });
+
+            return content;
+        }
+
+        public async Task CreateTask(TaskDispayModel model)
+        {
+            _tasks.CreateTask(model);
+        }
 
 
-       
+        public async Task<AppUserData[]> GetStudentsAvalableForTask(string taskTitle, string taskTag)
+        {
+            AppUserData[] users = null;
+
+            await Task.Run(() =>
+            {
+                users = _tasks.GetStudentsAvalableForTask(taskTitle, taskTag);
+            });
+
+            return users;
+        }
+
+        public async Task AssignTaskToUser(string taskTitle, string taskTag, string userName)
+        {
+            _tasks.AssignTaskToUser(taskTitle, taskTag, userName);
+        }
     }
 }

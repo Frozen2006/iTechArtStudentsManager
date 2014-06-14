@@ -1,0 +1,24 @@
+﻿<div class="row" style="padding-bottom: 10px">
+    <a class="btn btn-success" ng-click="createTask()">Create task</a>
+</div>
+<div class="row">
+    <div class="well col-md-3 taskBlocks">
+        <h3>Tasks:</h3>
+        <div class="three">
+            <ul ng-repeat="taskTag in taskTags">
+                <li>
+                    <div>{{taskTag.Tag}}</div>
+                    <ul ng-repeat="task in taskTag.Tasks">
+                        <li><div style="cursor: pointer;" ng-click="onTaskSelected(task)">{{task.Title}}</div></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="well col-md-8 taskBlocks" ng-show="currentTaskInfo.isShow">
+        <h3>{{currentTaskInfo.title}}</h3> <hr/>
+        <p>Level: <b>{{currentTaskInfo.level}}</b></p>
+        <div style="width: 100%; word-wrap: break-word; color: black" ng-bind-html="currentTaskInfo.text"></div>
+        <a class="btn btn-primary">Assign</a>
+    </div>
+</div>
