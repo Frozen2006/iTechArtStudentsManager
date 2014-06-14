@@ -3,26 +3,30 @@
 var iTechArtStudentsManagerApp = angular.module('iTechArtStudentsManagerApp', ['chartjs-directive', 'ui.bootstrap', 'ngRoute', 'ui.tinymce', 'ngSanitize'])
     .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
         $routeProvider
-          .when('/', {
-              templateUrl: 'views/main.html',
-              controller: 'MainCtrl'
-          })
-          .when('/Login', {
-              templateUrl: 'views/partials/loginPartial.html',
-              controller: 'LoginCtrl'
-          })
-          .when('/Reports', {
-              templateUrl: 'views/partials/reportsPartial.html',
-              controller: 'ReportsController'
-          })
-          .when('/GroupsManagment', {
-              templateUrl: 'views/partials/groupManagmentPartial.html',
-              controller: 'GroupsManagmentController'
-          })
-         .when('/TaskManagment', {
-             templateUrl: 'views/partials/taskBankPartial.html',
-             controller: 'TaskBankController'
-         })
+       .when('/', {
+           templateUrl: 'views/main.html',
+           controller: 'MainCtrl'
+       })
+      .when('/Login', {
+          templateUrl: 'views/partials/loginPartial.html',
+          controller: 'LoginCtrl'
+      })
+        .when('/Home', {
+            templateUrl: 'views/partials/homePartial.html',
+            controller: 'MainCtrl'
+        })
+      .when('/Reports', {
+          templateUrl: 'views/partials/reportsPartial.html',
+          controller: 'ReportsController'
+      })
+      .when('/GroupsManagment', {
+          templateUrl: 'views/partials/groupManagmentPartial.html',
+          controller: 'GroupsManagmentController'
+      })
+      .when('/TaskManagment', {
+          templateUrl: 'views/partials/taskBankPartial.html',
+          controller: 'TaskBankController'
+      })
           .otherwise({
               redirectTo: '/'
           });
@@ -96,6 +100,28 @@ iTechArtStudentsManagerApp.provider('hubProvider', function () {
                 });
 
                 return deffered.promise();
+            }
+        };
+    };
+});
+
+iTechArtStudentsManagerApp.provider('AuthProvider', function () {
+    var isAuthorized = false;
+    var self = this;
+
+    this.$get = function () {
+        return {
+            isAuthorized: function () {
+                return isAuthorized;
+            },
+            authorize: function () {
+                isAuthorized = true;
+            },
+            logOut: function () {
+                isAuthorized = false;
+            },
+            subscribe: function (callback) {
+
             }
         };
     };

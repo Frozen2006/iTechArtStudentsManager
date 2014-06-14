@@ -103,6 +103,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="scripts\controllers\assingModal.js" />
     <Content Include="scripts\vendor\angular-sanitize.js" />
     <Content Include="scripts\vendor\tinymce\license.txt" />
     <Content Include="scripts\vendor\tinymce\plugins\advlist\plugin.js" />
@@ -391,6 +392,7 @@
     <Content Include="scripts\vendor\ui-bootstrap-tpls-0.11.0.min.js" />
     <Content Include="styles\main.css" />
     <Content Include="views\main.html" />
+    <Content Include="views\modals\assignTask.html" />
     <Content Include="views\modals\createTask.html" />
     <Content Include="views\partials\groupManagmentPartial.html" />
     <Content Include="views\partials\loginPartial.html" />
