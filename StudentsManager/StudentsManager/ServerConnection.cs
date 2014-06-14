@@ -139,5 +139,24 @@ namespace StudentsManager
         {
             _tasks.AssignTaskToUser(taskTitle, taskTag, userName);
         }
+
+
+        public async Task<string> GetGroupSchedule(string groupName)
+        {
+            string data = null;
+            await Task.Run(() => 
+            {
+                data = _groups.GetGroupSchedule(groupName);
+            });
+
+            return data;
+        }
+
+        public async Task SaveGroupSchedule(string groupName, string value)
+        {
+            _groups.SaveGroupSchedule(groupName, value);
+        }
+
+        
     }
 }
