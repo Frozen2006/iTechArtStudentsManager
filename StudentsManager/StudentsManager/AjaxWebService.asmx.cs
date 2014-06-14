@@ -75,9 +75,6 @@ namespace StudentsManager
                     .Replace("{{message}}", message);
         }
 
-        private async Task SignInAsync(ApplicationUser user, bool isPersistent)
-        {
-            
-        }
+       
     }
 }
