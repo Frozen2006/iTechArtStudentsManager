@@ -61,3 +61,9 @@ font-size: 27px;
 margin: 0;
 margin-bottom: -22px;
 }
+
+
+.blackGroupsList {
+    color: black;
+    cursor: pointer;
+}

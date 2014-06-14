@@ -59,12 +59,23 @@ namespace DAL
         public AppUserData[] GetStudentsAvalableForTask(string taskTitle, string taskTag)
         {
             var task = context.Tasks.FirstOrDefault(m => (m.Name == taskTitle) && (m.Tags == taskTag));
+            var studentRoleId = context.Roles.FirstOrDefault(m => m.Name == "Student").Id;
 
-            return context.TaskStudents.Where(m => m.Task != task) //select students who didn't has this task
-                .Select(m => m.Student).ToList()
+            var alreadyAssignbed = context.TaskStudents.Where(m => m.Task.Id == task.Id).Select(m=>m.Student.Id).ToList();
+
+            var usersId = context.Users.Select(m=>m.Id).ToList().Where(m=>!alreadyAssignbed.Contains(m));
+
+            return context.Users.ToList().Where(m => usersId.Contains(m.Id)).ToList().Where(q => IsInRole(q, "Student"))
                 .Select(m => new AppUserData() { LastAndFirstName = m.FirstName + ' ' + m.LastName, UserName = m.UserName }).ToArray();
         }
 
+
+        private bool IsInRole(ApplicationUser user, string role)
+        {
+            var a = context.Roles.FirstOrDefault(m => m.Name == role);
+            var b = a.Users.Where(m => m.UserId == user.Id);
+            return context.Roles.FirstOrDefault(m => m.Name == role).Users.Where(m=>m.UserId == user.Id).Count() > 0;
+        }
 
         public void AssignTaskToUser(string taskTitle, string taskTag, string userName)
         {
@@ -79,6 +90,13 @@ namespace DAL
             context.TaskStudents.Add(trelation);
 
             context.SaveChanges();
+        }
+
+
+        public StudentMark[] GetUserMarks(string userName)
+        {
+            return context.TaskStudents.Where(m => m.Student.UserName == userName).ToArray().
+                Where(m=>m.Mark != null).Select(m => new StudentMark() { Tag = m.Task.Tags, Mark = (int)m.Mark }).ToArray();
         }
     }
 }

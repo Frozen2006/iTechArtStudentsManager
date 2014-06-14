@@ -1,0 +1,15 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">Group schedule</h3>
+</div>
+<div class="modal-body">
+    <form>
+        <span class="help-block">Group name: <b ng-bind="group"></b></span></span> <hr/>
+        <textarea ui-tinymce class="form-control" ng-model="schedule.data" style="min-height: 350px;"></textarea>
+    </form>
+
+    <hr />
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">Update</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

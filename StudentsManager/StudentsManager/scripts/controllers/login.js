@@ -1,4 +1,4 @@
-﻿iTechArtStudentsManagerApp.controller('LoginCtrl', ['$scope', 'AuthProvider', '$location', function ($scope, authProvider, $location) {
+﻿iTechArtStudentsManagerApp.controller('LoginCtrl', ['$scope', '$rootScope', 'AuthProvider', '$location', function ($scope, $rootScope, authProvider, $location) {
     $scope.login = '';
     $scope.pass = '';
     $scope.message = ''
@@ -22,7 +22,10 @@
                     $scope.$apply();
 
                     authProvider.authorize();
+
                     $location.path("/");
+                    $rootScope.$apply();
+                    
 
                     //getRoleName();
                 } else {

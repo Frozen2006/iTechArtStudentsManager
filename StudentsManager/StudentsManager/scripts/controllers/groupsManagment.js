@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-iTechArtStudentsManagerApp.controller('GroupsManagmentController', ['$scope', 'hubProvider', function ($scope, hubProvider) {
+iTechArtStudentsManagerApp.controller('GroupsManagmentController', ['$scope', 'hubProvider', '$modal', function ($scope, hubProvider, $modal) {
 
     var updateView = function () {
         if (!$scope.$$phase) {
@@ -17,7 +17,7 @@ iTechArtStudentsManagerApp.controller('GroupsManagmentController', ['$scope', 'h
 
 
     $scope.unassingn = function (user) {
-        hubProvider.call('serverConnection', 'unassignUser', groupName, user.UserName);
+        hubProvider.call('serverConnection', 'unassignUser', $scope.currentGroup, user.UserName);
 
         $scope.currentAssignedUsers = $.map($scope.currentAssignedUsers, function (el) {
             if (el !== user) {
@@ -31,7 +31,7 @@ iTechArtStudentsManagerApp.controller('GroupsManagmentController', ['$scope', 'h
     };
 
     $scope.assingn = function (user) {
-        hubProvider.call('serverConnection', 'assignUser', groupName, user.UserName);
+        hubProvider.call('serverConnection', 'assignUser', $scope.currentGroup, user.UserName);
 
         $scope.currentUnassignedUsers = $.map($scope.currentUnassignedUsers, function (el) {
             if (el !== user) {
@@ -70,6 +70,20 @@ iTechArtStudentsManagerApp.controller('GroupsManagmentController', ['$scope', 'h
             $scope.currentUnassignedUsers = data.Unassigned;
 
             updateView();
+        });
+    };
+
+
+    $scope.onGroupDblClick = function (groupName) {
+        var modalInstance = $modal.open({
+            templateUrl: 'views/modals/scheduleModal.html',
+            controller: 'ScheduleModalController',
+            size: 'lg',
+            resolve: {
+                groupName: function () {
+                    return groupName;
+                }
+            }
         });
     };
 

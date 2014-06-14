@@ -4,7 +4,7 @@
             <p>Login: </p><input type="text" placeholder="Login" ng-model="login" class="form-control" />
         </div>
         <div class="form-group">
-            <p>Password: </p><input type="password" placeholder="password" ng-model="pass" class="form-control" />
+            <p>Password: </p><input type="password" placeholder="password" ng-model="pass" class="form-control" ng-enter="authenticate()" />
         </div>
         <div class="form-group">
             <input type="button" value="Sign In" ng-model="pass" ng-click="authenticate()" class="btn btn-primary center-block" />
