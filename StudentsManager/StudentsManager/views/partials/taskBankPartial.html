@@ -19,6 +19,6 @@
         <h3>{{currentTaskInfo.title}}</h3> <hr/>
         <p>Level: <b>{{currentTaskInfo.level}}</b></p>
         <div style="width: 100%; word-wrap: break-word; color: black" ng-bind-html="currentTaskInfo.text"></div>
-        <a class="btn btn-primary">Assign</a>
+        <a class="btn btn-primary" ng-click="onAssign()">Assign</a>
     </div>
 </div>

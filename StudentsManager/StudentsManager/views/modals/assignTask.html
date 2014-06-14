@@ -3,15 +3,11 @@
 </div>
 <div class="modal-body">
     <form>
-        <span class="help-block">Task name: <b ng-bind="taskInfo.Title">tst</b></span><span class="help-block">Task level: <b ng-bind="taskInfo.Level">10</b></span>
+        <span class="help-block">Task name: <b ng-bind="taskInfo.Title"></b></span><span class="help-block">Task level: <b ng-bind="taskInfo.Level"></b></span>
         <div class="form-group">
             <label class="control-label">Student:</label>
             <div class="controls">
-                <select class="form-control">
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                    <option>Option 3</option>
-                </select>
+                <select class="form-control" ng-model="selectedUser.user" ng-options="user.LastAndFirstName for user in users"></select>
             </div>
         </div>
     </form>
