@@ -47,7 +47,7 @@ namespace StudentsManager
         {
             var result = new LoginResult();
 
-            var userStore = new ApplicationUserStore<ApplicationUser>(new StudentsManagerDbContext());
+            var userStore = new ApplicationUserStore<ApplicationUser>(StudentsManagerDbContext.GetInstance());
             var userManager = new ApplicationUserManager<ApplicationUser>();
 
             var userByName = userManager.FindByName(username);
@@ -76,11 +76,30 @@ namespace StudentsManager
             }
 
 
-
             return result;
             
         }
 
-       
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string GetRoleName(string username, string passwordHash)
+        {
+            var context = StudentsManagerDbContext.GetInstance();
+            var userStore = new ApplicationUserStore<ApplicationUser>(context);
+            var userManager = new ApplicationUserManager<ApplicationUser>();
+
+            var userByName = userManager.FindByName(username);
+            if (userByName == null)
+            {
+                return "None";
+            }
+
+            string roleName = userManager
+                .GetRoles<ApplicationUser, string>(userByName.Id)
+                .FirstOrDefault();
+
+            return roleName;
+        }
     }
 }

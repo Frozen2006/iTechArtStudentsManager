@@ -10,7 +10,7 @@ namespace DAL
 {
     public class GroupsRepository
     {
-        StudentsManagerDbContext _context = new StudentsManagerDbContext();
+        StudentsManagerDbContext _context = StudentsManagerDbContext.GetInstance();
 
 
         public string[] GetAvalableGroups()

@@ -16,7 +16,7 @@ namespace StudentsManager.Security.Identity
         protected ApplicationUserStore<TUser> ApplicationUserStore { get; set; }
 
         public ApplicationUserManager()
-            : base(new ApplicationUserStore<TUser>(new StudentsManagerDbContext()))
+            : base(new ApplicationUserStore<TUser>(StudentsManagerDbContext.GetInstance()))
         {
             this.UserValidator = new UserValidator<TUser>(this) { AllowOnlyAlphanumericUserNames = false };
         }
