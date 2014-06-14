@@ -1,6 +1,7 @@
-﻿iTechArtStudentsManagerApp.controller('LoginCtrl', ['$scope', function ($scope) {
+﻿iTechArtStudentsManagerApp.controller('LoginCtrl', ['$rootScope', function ($scope) {
     $scope.login = '';
     $scope.pass = '';
+    $scope.message = ''
 
     $scope.authenticate = function () {
         console.log('Auth with' + $scope.login + ' ' + $scope.pass);
@@ -11,19 +12,26 @@
             data: "{'username':'" + $scope.login + "', 'passwordHash':'" + $scope.pass + "'}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            success: OnSuccessCall,
-            error: OnErrorCall
+            success: function OnSuccessCall(responseJson) {
+                var response = responseJson.d;
+                if (response.authenticationResult) {
+                    $scope.message = 'Authenticated...';
+                    $scope.$apply();
+                    console.log('Authenticated...');
+                } else {
+                    $scope.message = 'Authentication failed.';
+                    $scope.$apply();
+                    console.log('Authentication failed.');
+                }
+               
+                console.log('Success');
+            },
+            error: function OnErrorCall(response) {
+                $scope.message = response.responseText;
+            }
+           
         });
 
-        function OnSuccessCall(responseJson) {
-            var response = JSON.parse(responseJson.d);
-            alert(response.authenticationResult);
-        }
-
-
-        function OnErrorCall(response) {
-            alert(response.status + " " + response.statusText);
-        }
     }
 
 

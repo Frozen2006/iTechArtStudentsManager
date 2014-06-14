@@ -1,5 +1,17 @@
-﻿    <div>
-        <p>Login: </p><input type="text" placeholder="Login" ng-model="login"/>
-        <p>Password: </p><input type="password" placeholder="password" ng-model="pass" />
-        <input type="button" value="Sign In" ng-model="pass" ng-click="authenticate()"/>
+﻿<div class="row" style="width:100%">
+    <div class="center-block form-horizontal col-md-4 col-md-offset-4 col-sm-12" style="margin-left:34%">
+        <div class="form-group">
+            <p>Login: </p><input type="text" placeholder="Login" ng-model="login" class="form-control" />
+        </div>
+        <div class="form-group">
+            <p>Password: </p><input type="password" placeholder="password" ng-model="pass" class="form-control" />
+        </div>
+        <div class="form-group">
+            <input type="button" value="Sign In" ng-model="pass" ng-click="authenticate()" class="btn btn-primary center-block" />
+        </div>
+        <div class="form-group">
+            <p class="text-center" ng-bind="message"></p>
+        </div>
+        
     </div>
+</div>

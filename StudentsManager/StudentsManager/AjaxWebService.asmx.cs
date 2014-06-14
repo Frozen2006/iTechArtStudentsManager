@@ -12,6 +12,8 @@ using Microsoft.Owin.Security;
 using DAL.Entities;
 using System.Net;
 using System.Threading.Tasks;
+using StudentsManager.Security.Identity;
+using DAL;
 
 namespace StudentsManager
 {
@@ -33,21 +35,23 @@ namespace StudentsManager
             return "Hello World";
         }
 
+        public struct LoginResult
+        {
+            public bool authenticationResult;
+            public string message;
+        }
+
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        async public Task<string> Login(string username, string passwordHash)
+        public LoginResult Login(string username, string passwordHash)
         {
-            var responseJson = "{\"authenticationResult\":\"{{authenticationResult}}\"," +
-                                "\"message\":\"{{message}}\"}";
+            var result = new LoginResult();
 
-            bool authenticationResult = true;
-            string message = "";
-
-            var userStore = new UserStore<IdentityUser>();
-            var userManager = new UserManager<IdentityUser>(userStore);
+            var userStore = new ApplicationUserStore<ApplicationUser>(new StudentsManagerDbContext());
+            var userManager = new ApplicationUserManager<ApplicationUser>();
 
             var userByName = userManager.FindByName(username);
-            IdentityUser userByPassword = null;
+            ApplicationUser userByPassword = null;
             if (userByName != null)
             {
                 userByPassword = userManager.Find(username, passwordHash);
@@ -58,21 +62,23 @@ namespace StudentsManager
             {
                 var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
                 authenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-                var identity = await userManager.CreateIdentityAsync(userByPassword, DefaultAuthenticationTypes.ApplicationCookie);
+                var identity = userManager.CreateIdentity<ApplicationUser,string>(userByPassword, DefaultAuthenticationTypes.ApplicationCookie);
+                //var identity = await userManager.CreateIdentityAsync(userByPassword, DefaultAuthenticationTypes.ApplicationCookie);
                 authenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = true }, identity);
+                result.message = "ok";
+                result.authenticationResult = true;
             }
             else
             {
 
-                message = "Invalid email or password";
-                authenticationResult = false;
+                result.message = "Invalid email or password";
+                result.authenticationResult = false;
             }
 
-           
 
-            return responseJson
-                    .Replace("{{authenticationResult}}", authenticationResult.ToString())
-                    .Replace("{{message}}", message);
+
+            return result;
+            
         }
 
        
