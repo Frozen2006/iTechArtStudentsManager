@@ -55,7 +55,7 @@ namespace DAL
 
         private bool IsInRole(ApplicationUser user, string role)
         {
-            return _context.Roles.FirstOrDefault(m => m.Name == role).Users.Where(m => m.UserId == user.Id).Count() > 0;
+            return _context.Roles.FirstOrDefault(m => m.Name == role).Users.Where(m => m.UserId == user.Id).ToList().Count() > 0;
         }
 
         public void UnassignUser(string groupName, string userName)
@@ -72,6 +72,18 @@ namespace DAL
             _context.Users.FirstOrDefault(m => m.UserName == userName).Groups.Add(group);
 
 
+            _context.SaveChanges();
+        }
+
+
+        public string GetGroupSchedule(string groupName)
+        {
+            return _context.Groups.FirstOrDefault(m => m.Name == groupName).Schedule;
+        }
+
+        public void SaveGroupSchedule(string groupName, string value)
+        {
+            _context.Groups.FirstOrDefault(m => m.Name == groupName).Schedule = value;
             _context.SaveChanges();
         }
     }

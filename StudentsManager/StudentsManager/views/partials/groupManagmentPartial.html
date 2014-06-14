@@ -2,7 +2,7 @@
     <div class="well col-md-3">
         <h3>Groups</h3>
         <ul ng-repeat="group in groups track by $index">
-            <li class="categoruItem" ng-click="groupClick(group)">{{group}}</li>
+            <li class="categoruItem" ng-click="groupClick(group)" ng-dblclick="onGroupDblClick(group)">{{group}}</li>
         </ul>
         <hr>
         <form>

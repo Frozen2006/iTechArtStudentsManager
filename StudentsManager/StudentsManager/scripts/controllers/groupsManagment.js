@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-iTechArtStudentsManagerApp.controller('GroupsManagmentController', ['$scope', 'hubProvider', function ($scope, hubProvider) {
+iTechArtStudentsManagerApp.controller('GroupsManagmentController', ['$scope', 'hubProvider', '$modal', function ($scope, hubProvider, $modal) {
 
     var updateView = function () {
         if (!$scope.$$phase) {
@@ -70,6 +70,20 @@ iTechArtStudentsManagerApp.controller('GroupsManagmentController', ['$scope', 'h
             $scope.currentUnassignedUsers = data.Unassigned;
 
             updateView();
+        });
+    };
+
+
+    $scope.onGroupDblClick = function (groupName) {
+        var modalInstance = $modal.open({
+            templateUrl: 'views/modals/scheduleModal.html',
+            controller: 'ScheduleModalController',
+            size: 'lg',
+            resolve: {
+                groupName: function () {
+                    return groupName;
+                }
+            }
         });
     };
 
