@@ -4,7 +4,9 @@ iTechArtStudentsManagerApp.controller('AssignModalController', ['$scope', 'hubPr
     $scope.isErrorVisible;
 
     $scope.users = [];
-    $scope.selectedUser;
+    $scope.selectedUser = {};
+    $scope.selectedUser.user = {};
+
 
     $scope.taskInfo = taskInfo;
 
@@ -18,11 +20,11 @@ iTechArtStudentsManagerApp.controller('AssignModalController', ['$scope', 'hubPr
     };
 
     $scope.ok = function () {
-        if (!$scope.selectedUser) {
+        if (!$scope.selectedUser.user) {
             $scope.isErrorVisible = true;
             return;
         };
-        $modalInstance.close($scope.selectedUser);
+        $modalInstance.close($scope.selectedUser.user);
     };
 
 }]);
