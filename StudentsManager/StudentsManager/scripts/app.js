@@ -1,6 +1,6 @@
 'use strict';
 
-var iTechArtStudentsManagerApp = angular.module('iTechArtStudentsManagerApp', []).config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+var iTechArtStudentsManagerApp = angular.module('iTechArtStudentsManagerApp', ['chartjs-directive']).config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     $routeProvider
       .when('/', {
           templateUrl: 'views/main.html',
@@ -12,8 +12,16 @@ var iTechArtStudentsManagerApp = angular.module('iTechArtStudentsManagerApp', []
       })
         .when('/Home', {
             templateUrl: 'views/partials/homePartial.html',
-            controller:'MainCtrl'
+            controller: 'MainCtrl'
         })
+      .when('/Reports', {
+          templateUrl: 'views/partials/reportsPartial.html',
+          controller: 'ReportsController'
+      })
+      .when('/GroupsManagment', {
+          templateUrl: 'views/partials/groupManagmentPartial.html',
+          controller: 'GroupsManagmentController'
+      })
       .otherwise({
           redirectTo: '/'
       });
@@ -37,7 +45,7 @@ iTechArtStudentsManagerApp.provider('hubProvider', function () {
 
     this.$get = function () {
         return {
-            init: function(callback) {
+            init: function (callback) {
                 self.init(callback);
             },
             callbacks: {
@@ -56,6 +64,37 @@ iTechArtStudentsManagerApp.provider('hubProvider', function () {
             },
             reInit: function () {
                 self.init();
+            },
+            call: function (hubName, methodName, params) {
+                var deffered = new $.Deferred;
+
+                var argsForExternal = [];
+                for (var i = 2; i < arguments.length; i++) {
+                    argsForExternal.push(arguments[i]);
+                };
+
+                if (typeof connection !== 'undefined') {
+                    if (params) {
+                        return $.connection[hubName].server[methodName].apply(this, argsForExternal);
+                    } else {
+                        return $.connection[hubName].server[methodName]();
+                    }
+
+                };
+
+                self.init(function () {
+                    if (params) {
+                        $.connection[hubName].server[methodName].apply(this, argsForExternal).done(function (data) {
+                            deffered.resolve(data);
+                        });
+                    } else {
+                        $.connection[hubName].server[methodName]().done(function (data) {
+                            deffered.resolve(data);
+                        });
+                    }
+                });
+
+                return deffered.promise();
             }
         };
     };
@@ -67,7 +106,7 @@ iTechArtStudentsManagerApp.provider('AuthProvider', function () {
 
     this.$get = function () {
         return {
-            isAuthorized: function(){
+            isAuthorized: function () {
                 return isAuthorized;
             },
             authorize: function () {
