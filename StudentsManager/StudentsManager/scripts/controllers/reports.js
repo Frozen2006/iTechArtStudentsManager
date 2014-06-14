@@ -4,29 +4,13 @@ iTechArtStudentsManagerApp.controller('ReportsController', ['$scope', 'hubProvid
 
     $scope.students = [];
 
-
     $scope.MyChart = {
-        width: 500,
-        height: 500,
+        width: $("#chartContainer").width(),
+        height: $("#chartContainer").height() < (screen.height - 400) ? screen.height - 400 : $("#chartContainer").height(),
         options: {},
         data: {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
-            datasets: [
-                {
-                    fillColor: "rgba(220,220,220,0.5)",
-                    strokeColor: "rgba(220,220,220,1)",
-                    pointColor: "rgba(220,220,220,1)",
-                    pointStrokeColor: "#fff",
-                    data: [65, 59, 90, 81, 56, 55, 40]
-                },
-                {
-                    fillColor: "rgba(151,187,205,0.5)",
-                    strokeColor: "rgba(151,187,205,1)",
-                    pointColor: "rgba(151,187,205,1)",
-                    pointStrokeColor: "#fff",
-                    data: [28, 48, 40, 19, 96, 27, 100]
-                }
-            ]
+            labels: [],
+            datasets: [            ]
         }
     };
 
@@ -34,34 +18,39 @@ iTechArtStudentsManagerApp.controller('ReportsController', ['$scope', 'hubProvid
     $scope.currentStudent = null;
     $scope.selectStudent = function (student) {
         $scope.isStudentSelected = false;
-        $scope.$apply();
+
+        /*if (!$scope.$$phase) {
+            $scope.$apply();
+        }*/
 
         $scope.currentStudent = student;
-        hubProvider.call('serverConnection', 'getStudentMarks', student).done(function (data) {
+        hubProvider.call('serverConnection', 'getStudentMarks', student.UserName).done(function (data) {
 
             $scope.isStudentSelected = true;
-
-            $scope.MyChart = {
-                data: {
+            //$scope.MyChart.data.datasets[0].data[0] = Math.floor(Math.random() * 10);
+            $scope.MyChart.data =  {
                     labels: $.map(data, function (element) {
-                        return elememt.tag
+                        return element.Tag
                     }),
                     datasets: [{
-                        fillColor: "rgba(220,220,220,0.5)",
+                        fillColor: "rgba(205,0,0,0.5)",
                         strokeColor: "rgba(220,220,220,1)",
                         pointColor: "rgba(220,220,220,1)",
                         pointStrokeColor: "#fff",
                         data: $.map(data, function (element) {
-                            return element.mark
+                            return element.Mark
                         })
                     }]
-                }
-            };
+                };
+
+            if (!$scope.$$phase) {
+                $scope.$apply();
+            }
         });
 
     };
 
-    hubProvider.call('serverConnection', 'getStudents', 'tt1', 'tt22').done(function (data) {
+    hubProvider.call('serverConnection', 'getStudents').done(function (data) {
         $scope.students = data;
         $scope.$apply();
     });

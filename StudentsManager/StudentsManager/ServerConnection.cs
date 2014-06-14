@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.SignalR;
+﻿using DAL;
+using Microsoft.AspNet.SignalR;
 using Models;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,9 @@ namespace StudentsManager
 {
     public class ServerConnection : Hub
     {
+
+        private StudentsRepository _repository = new StudentsRepository();
+
         public async Task<string[]> HelloWorld()
         {
             var data = new List<string>();
@@ -48,19 +52,16 @@ namespace StudentsManager
             return marks.ToArray();
         }
 
-        public async Task<string[]> GetStudents()
+        public async Task<AppUserData[]> GetStudents()
         {
-            List<string> students = new List<string>();
-
+            AppUserData[] data = null;
             await Task.Run(() =>
             {
-                students.Add("test 1");
-                students.Add("test 2");
-                students.Add("test 3");
+               data = _repository.GetUsersNamesList();
 
             });
 
-            return students.ToArray();
+            return data;
         }
 
        
