@@ -38,6 +38,18 @@ namespace DAL
 
         }
 
+        private static StudentsManagerDbContext _instance = null;
+
+        public static StudentsManagerDbContext GetInstance()
+        {
+            if (_instance == null)
+            {
+                _instance = new StudentsManagerDbContext();
+            }
+
+            return _instance;
+        }
+
 
     }
 }

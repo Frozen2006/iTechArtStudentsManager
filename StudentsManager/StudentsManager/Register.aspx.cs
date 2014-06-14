@@ -14,7 +14,7 @@ namespace WebFormsIdentity
         protected void CreateUser_Click(object sender, EventArgs e)
         {
             // Default UserStore constructor uses the default connection string named: DefaultConnection
-            var context = new StudentsManagerDbContext();
+            var context = StudentsManagerDbContext.GetInstance();
             var userStore = new ApplicationUserStore<ApplicationUser>(context);
             var manager = new ApplicationUserManager<ApplicationUser>();
 

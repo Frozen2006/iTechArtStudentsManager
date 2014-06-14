@@ -1,6 +1,31 @@
 'use strict';
 
-iTechArtStudentsManagerApp.controller('MainCtrl', ['$scope', 'hubProvider', function ($scope, hubProvider) {
+iTechArtStudentsManagerApp.controller('MainCtrl', ['$rootScope', 'hubProvider', '$location', 'AuthProvider', function ($scope, hubProvider, $location, authProvider) {
+    $scope.isAuthentificated = {
+        value: ''
+    };
+
+    $scope.$watch('isAuthentificated.value', function (newValue, oldValue) {
+        if (newValue !== oldValue) {
+            $scope.isAuthentificated.value = newValue;
+            if ((typeof $scope.isAuthentificated !== 'undefined') && (!$scope.isAuthentificated.value)) {
+                $location.path("/Login");
+            }
+            else {
+                $location.path("/");
+            }
+        }
+    }, true);
+
+
+    $scope.isAuthentificated.value = authProvider.isAuthorized();
+
+    if ((typeof $scope.isAuthentificated !== 'undefined') && (!$scope.isAuthentificated.value)) {
+        $location.path("/Login");
+    }
+    else {
+        $location.path("/");
+    }
 
   $scope.awesomeThings = [
     'HTML5 Boilerplate',
