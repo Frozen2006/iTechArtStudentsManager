@@ -123,7 +123,11 @@
     <Content Include="scripts\angular-touch.min.js" />
     <Content Include="scripts\angular.js" />
     <Content Include="scripts\angular.min.js" />
+
     <Content Include="scripts\filters\marksSortFilter.js" />
+
+    <Content Include="scripts\controllers\individualTasks.js" />
+
     <Content Include="scripts\i18n\angular-locale_af-na.js" />
     <Content Include="scripts\i18n\angular-locale_af-za.js" />
     <Content Include="scripts\i18n\angular-locale_af.js" />
@@ -706,6 +710,7 @@
     <Content Include="views\modals\scheduleModal.html" />
     <Content Include="views\partials\homePartial.html" />
     <Content Include="views\partials\groupManagmentPartial.html" />
+    <Content Include="views\partials\individualTasksPartial.html" />
     <Content Include="views\partials\loginPartial.html" />
     <Content Include="views\partials\menuPartial.html" />
     <Content Include="views\partials\rateStudentPartial.html" />

@@ -63,6 +63,7 @@ margin-bottom: -22px;
 }
 
 
+
 .blackGroupsList {
     color: black;
     cursor: pointer;
@@ -71,4 +72,8 @@ margin-bottom: -22px;
 
 .black {
     color: black;
+}
+
+.tag{
+    color:blue;
 }

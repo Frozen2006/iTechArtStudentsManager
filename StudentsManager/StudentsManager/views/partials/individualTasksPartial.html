@@ -1,0 +1,31 @@
+﻿<div class="row" style="color:black">
+    <div class="well col-md-3">
+        <h3>Tasks</h3>
+        <ul ng-repeat="task in tasks track by $index">
+            <li class="categoruItem" ng-click="taskClick(task)">{{task}}</li>
+        </ul>       
+    </div>
+    <div class="well col-xs-offset-1 col-md-6" ng-show="isTaskDescriptionVisible">
+
+        
+        <div class="row text-center">
+            <div class="col-md-12">
+                <h3 class="col-md-2">{{taskDetails.ComplexLevel}}</h3>
+                <h2 class="col-md-10">{{taskDetails.Title}}</h2>
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-12">
+                {{taskDetails.Content}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 tag" style="color:blue">
+                {{taskDetails.Tag}}
+            </div>
+        </div>
+       
+    </div>
+    
+</div>
