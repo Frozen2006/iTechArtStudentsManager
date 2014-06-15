@@ -39,7 +39,7 @@ namespace DAL
 
                 ApplicationUser testUser = new ApplicationUser
                 {
-                    UserName = "test",
+                    UserName = "teach",
                     PasswordHash = "AAv8jUAGu/+mXbigKaT0q2jOKKqKU9dSDUKACiYnTZeKLMyohIg8oMr/9w7AyigS3A==",
                     SecurityStamp = "81a738ef-6b6a-4bd5-b6d0-442fb2f903e6"
                 };
@@ -61,11 +61,54 @@ namespace DAL
 
                 CreateTasks(context, testUser);
 
+                AddLectionFiles(context, testUser);
+
+                context.SaveChanges();
             }
             
         }
 
 
+        public void AddLectionFiles(StudentsManagerDbContext context, ApplicationUser user)
+        {
+            Entities.Lection lection1 = new Entities.Lection
+            {
+                Creator = user,
+                Description = "html explanation",
+                Name = "html",
+
+            };
+
+            Entities.Lection lection2 = new Entities.Lection
+            {
+                Creator = user,
+                Description = "xmpp explanation",
+                Name = "xmpp",
+
+            };
+
+            context.SaveChanges();
+
+            Entities.File newFile1 = new Entities.File{
+                Date = DateTime.Now,
+                Name = "Lection 1:html",
+                Path = "/sample.pdf"
+            };
+
+            Entities.File newFile2 = new Entities.File
+            {
+                Date = DateTime.Now,
+                Name = "Lection 2:XMPP",
+                Path = "/xmpp.pdf"
+            };
+
+            context.SaveChanges();
+
+            lection1.Files.Add(newFile1);
+            lection2.Files.Add(newFile2);
+
+            context.SaveChanges();
+        }
 
         public void AddStudents(StudentsManagerDbContext context, string studntRoleId)
         {
