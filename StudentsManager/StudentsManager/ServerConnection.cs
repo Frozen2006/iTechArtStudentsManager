@@ -44,6 +44,11 @@ namespace StudentsManager
             return marks;
         }
 
+        public StudentMark[] GetStudentMarksSync(string studentName)
+        {
+                return _tasks.GetUserMarks(studentName);
+        }
+
         public async Task<AppUserData[]> GetStudents()
         {
             AppUserData[] data = null;
@@ -157,6 +162,46 @@ namespace StudentsManager
             _groups.SaveGroupSchedule(groupName, value);
         }
 
+
+        public async Task<AppUserData[]> GetStudentsWithTasks()
+        {
+            AppUserData[] users = null;
+
+            await Task.Run(() =>
+            {
+                users = _tasks.GetStudentsWithTasks();
+            });
+
+
+            return users;
+        }
+
+
+        public async Task<TaskDispayModel[]> GetUserTasks(string userName)
+        {
+            TaskDispayModel[] tasks = null;
+
+            await Task.Run(() =>
+            {
+                tasks = _tasks.GetUserTasks(userName);
+            });
+
+
+            return tasks;
+        }
+
+
+
+        public async Task SaveTaskResults(string userName, string taskTitle, string taskTag, string taskMark, string taskComent)
+        {
+            _tasks.SaveTaskResults(userName, taskTitle, taskTag, taskMark, taskComent);
+        }
+
+
+        public HomePageData GetHomePageData(string userName)
+        {
+            return _repository.GetHomePageData(userName);
+        }
         
     }
 }

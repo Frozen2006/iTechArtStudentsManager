@@ -5,7 +5,7 @@ iTechArtStudentsManagerApp.controller('ReportsController', ['$scope', 'hubProvid
     $scope.students = [];
 
     $scope.MyChart = {
-        width: $("#chartContainer").width(),
+        width: $("#chartContainer").width() - 50,
         height: $("#chartContainer").height() < (screen.height - 400) ? screen.height - 400 : $("#chartContainer").height(),
         options: {},
         data: {

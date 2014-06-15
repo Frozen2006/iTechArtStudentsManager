@@ -103,6 +103,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="scripts\controllers\rateStudent.js" />
+    <Content Include="scripts\controllers\rateStudentTaskModal.js" />
     <Content Include="scripts\controllers\scheduleModal.js" />
     <Content Include="scripts\angular-animate.js" />
     <Content Include="scripts\angular-animate.min.js" />
@@ -700,11 +702,13 @@
     <Content Include="scripts\vendor\ui-bootstrap-tpls-0.11.0.min.js" />
     <Content Include="styles\main.css" />
     <Content Include="views\main.html" />
+    <Content Include="views\modals\rateStudentTaskModal.html" />
     <Content Include="views\modals\scheduleModal.html" />
     <Content Include="views\partials\homePartial.html" />
     <Content Include="views\partials\groupManagmentPartial.html" />
     <Content Include="views\partials\loginPartial.html" />
     <Content Include="views\partials\menuPartial.html" />
+    <Content Include="views\partials\rateStudentPartial.html" />
     <Content Include="views\partials\ratingPartial.html" />
     <Content Include="views\modals\assignTask.html" />
     <Content Include="views\modals\createTask.html" />

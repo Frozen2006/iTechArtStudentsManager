@@ -1,0 +1,15 @@
+﻿<div class="row">
+    <div class="well col-md-3">
+        <h3>Students</h3>
+        <ul ng-repeat="student in students track by $index">
+            <li class="categoruItem" ng-click="studentClick(student)">{{student.LastAndFirstName}}</li>
+        </ul>
+        <hr>
+    </div>
+    <div class="well col-xs-offset-1 col-md-3" ng-show="isTaskVisible">
+        <h3>Tasks in proccess:</h3>
+        <ul ng-repeat="studentTask in studentTasks track by $index">
+            <li class="blackGroupsList" ng-click="rateTask(studentTask)"><div class="blackGroupsList">{{studentTask.Title}}</div></li>
+        </ul>
+    </div>
+</div>
