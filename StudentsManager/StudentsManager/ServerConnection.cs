@@ -226,6 +226,11 @@ namespace StudentsManager
         }
 
 
+        public AppLection[] GetLections()
+        {
+            return _repository.GetLections();
+        }
+
 
         
     }

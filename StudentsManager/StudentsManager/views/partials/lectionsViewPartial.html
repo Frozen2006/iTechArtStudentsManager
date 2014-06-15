@@ -1,0 +1,13 @@
+﻿<div class="row">
+    <div class="well col-md-3">
+        <h3>Lections</h3>
+        <ul ng-repeat="lection in lections track by $index">
+            <li class="categoruItem" ng-click="onLectionSelect(lection)">{{lection.Name}}</li>
+        </ul>
+        <hr>
+    </div>
+    <div class="well col-xs-offset-1 col-md-8" ng-show="isLectionVisible">
+        <canvas style="width: 100%; height: 90%" id="pdfPage"></canvas> <br/>
+        <button ng-click="toLeft()"><</button><button ng-click="toRight()">></button>
+    </div>
+</div>

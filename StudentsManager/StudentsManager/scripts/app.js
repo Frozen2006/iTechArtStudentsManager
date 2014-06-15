@@ -42,6 +42,11 @@ var iTechArtStudentsManagerApp = angular.module('iTechArtStudentsManagerApp', ['
         controller: 'IndividualTasksCtrl'
     })
 
+                .when('/Lections', {
+                    templateUrl: 'views/partials/lectionsViewPartial.html',
+                    controller: 'LectionsViewController'
+                })
+
     .otherwise({
         redirectTo: '/'
     });

@@ -75,6 +75,7 @@
     <script src="scripts/vendor/ui-bootstrap-tpls-0.11.0.min.js"></script>
 
     <script src="scripts/vendor/angular-chartjs-directive.js"></script>
+    <script src="scripts/vendor/pdf.js"></script>
 
     <!-- build:js scripts/scripts.js -->
     <script src="scripts/app.js"></script>
@@ -91,6 +92,7 @@
     <script src="scripts/controllers/scheduleModal.js"></script>
     <script src="scripts/controllers/rateStudent.js"></script>
     <script src="scripts/controllers/rateStudentTaskModal.js"></script>
+    <script src="scripts/controllers/lectionsViewController.js"></script>
 
     <script src='https://cdn.firebase.com/js/client/1.0.15/firebase.js'></script>
     <script src="https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js"></script>
@@ -123,11 +125,15 @@
                 <li>
                     <a href="/IndividualTasks">MyTasks</a>
                 </li>
+                <li>
+                    <a href="/Lections">Lections</a>
+                </li>
+                
                 <li class="teacher" ng-click="selected.value='second'" ng-class="(selected.value === 'second') ? 'active' : ''" id="second">
                     <a href="/Reports">Reports</a>
                 </li>
                 <li class="teacher" ng-click="selected.value='third'" ng-class="(selected.value === 'third') ? 'active' : ''" id="third">
-                    <a href="/GroupsManagment">GroupsManagment</a>
+                    <a href="/GroupsManagment">Groups</a>
                 </li>
                 <li class="teacher" ng-click="selected.value='forth'" ng-class="(selected.value === 'forth') ? 'active' : ''" id="forth">
                     <a href="/TaskManagment">Task bank</a>

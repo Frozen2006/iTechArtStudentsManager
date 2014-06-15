@@ -48,5 +48,10 @@ namespace DAL
                 Schedule = userGroups.Count() > 0 ? userGroups.FirstOrDefault().Schedule : String.Empty
             };
         }
+
+        public AppLection[] GetLections()
+        {
+            return context.Files.Select(m => new AppLection() { Name = m.Name, Src = m.Path }).ToArray();
+        }
     }
 }
