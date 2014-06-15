@@ -22,20 +22,20 @@
             <div class="form-group black">
                 <label class="control-label">Geroups:</label>
                 <div class="controls" ng-repeat="group in myData.Groups">
-                    <span>{{group.Title}}</span><br />
+                    <span>{{group}}</span><br />
                 </div>
             </div>
         </form>
     </div>
     <div class="well col-xs-offset-1 col-md-3">
         <h3>Chat:</h3>
-        <div style="width: 100%; background-color: white;" ng-repeat="message in lastMessages">
+        <div style="width: 100%; background-color: white;" ng-repeat="message in lastMessages track by $index">
             <div>{{message}}</div>
         </div> <br />
-        <input type="text" class="form-control" ng-model="currentMessage" ng-enter="addMessage()">
+        <input type="text" class="form-control" ng-model="mess.currentMessage" ng-enter="addMessage()">
     </div>
     <div class="well col-md-12">
         <h3>Schedule</h3> <hr />
-        <div style="width: 100%; word-wrap: break-word; color: black" ng-bind-html="currentTaskInfo.text"></div>
+        <div style="width: 100%; word-wrap: break-word; color: black" ng-bind-html="myData.Schedule"></div>
     </div>
 </div>

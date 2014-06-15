@@ -34,7 +34,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" ng-click="selected.value=''" href="/">iTechArt Students Manager</a>
+                <a class="navbar-brand" ng-click="selected.value=''" href="/"><span style="color:red; font-weight: bold;">:i</span><span style="color: white;font-weight: bold;">Tech</span><span style="color: red; font-weight: bold;">Art</span> Students Manager</a>
             </div>
             <div ng-controller="MainCtrl">
                 <div ng-show="isAuthentificated.value">
@@ -103,11 +103,11 @@
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
         var _gaq = [['_setAccount', 'UA-XXXXX-X'], ['_trackPageview']];
-    (function (d, t) {
-        var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
-        g.src = ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js';
-        s.parentNode.insertBefore(g, s)
-    }(document, 'script'));
+        (function (d, t) {
+            var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+            g.src = ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g, s)
+        }(document, 'script'));
     </script>
 
 
@@ -120,6 +120,9 @@
                 <li ng-click="selected.value='first'" ng-class="(selected.value == 'first') ? 'active' : ''" id="first">
                     <a href="/Rating">Rating</a>
                 </li>
+                <li>
+                    <a href="/IndividualTasks">MyTasks</a>
+                </li>
                 <li ng-click="selected.value='second'" ng-class="(selected.value === 'second') ? 'active' : ''" id="second">
                     <a href="/Reports">Reports</a>
                 </li>
@@ -130,25 +133,11 @@
                     <a href="/TaskManagment">Task bank</a>
                 </li>
                 <li>
-
                     <a href="/RateStudent">Rate Student</a>
-
-                    <a href="/IndividualTasks">MyTasks</a>
-
                 </li>
-                <li>
-                    <!--
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" id="download">My profile <span class="caret"></span></a>
-                        <ul class="dropdown-menu" aria-labelledby="download">
-                            <li>Logout</li>
-                        </ul>
-                    </li>
-                            -->
-                </li>
+
             </ul>
         </div>
     </script>
 </body>
 </html>
-
