@@ -10,7 +10,7 @@
         
         $.ajax({
             type: "POST",
-            url: serviceUrl + "/Login",
+            url: serviceUrl + "/Login?antiChache="+Math.floor(Math.random()*10000),
             data: "{'username':'" + $scope.login + "', 'passwordHash':'" + $scope.pass + "'}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",

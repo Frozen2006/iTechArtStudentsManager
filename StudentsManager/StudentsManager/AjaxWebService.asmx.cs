@@ -69,8 +69,8 @@ namespace StudentsManager
                 authenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = true }, identity);
                 result.message = "ok";
                 result.authenticationResult = true;
-                result.userName = User.Identity.Name;
-                result.userRole = User.IsInRole("Student") ? "Student" : "Teacher";
+                result.userName = userByPassword.UserName;
+                result.userRole = userManager.IsInRole(userByPassword.Id, "Student") ? "Student" : "Teacher";
             }
             else
             {
