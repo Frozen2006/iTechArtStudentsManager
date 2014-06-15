@@ -16,7 +16,7 @@ iTechArtStudentsManagerApp.controller('IndividualTasksCtrl', ['$scope', 'hubProv
     $scope.taskDetails = null;
     
   
-    $scope.taskClick = function (groupName) {
+    $scope.taskClick = function (taskName) {
         $scope.currentTask = taskName;
         $scope.isTaskDescriptionVisible = true;
         hubProvider.call('serverConnection', 'getTaskDetails', taskName).done(function (data) {
@@ -27,7 +27,7 @@ iTechArtStudentsManagerApp.controller('IndividualTasksCtrl', ['$scope', 'hubProv
     };
 
     var userName = null;
-    userName = window.StudentManager && window.StudentManager.userName;
+    userName = window.StudentsManager.userName;
     hubProvider.call('serverConnection', 'getCurrentTasksNames', userName).done(function (tasksList) {
         $scope.tasks = tasksList;
         updateView();

@@ -21,7 +21,7 @@
                     if (!window.StudentsManager) {
                         window.StudentsManager = {};
                     }
-                    window.StudentsManager.userName = resoinse.userName;
+                    window.StudentsManager.userName = response.userName;
 
                     $scope.message = 'Authenticated...';
                     $scope.$apply();

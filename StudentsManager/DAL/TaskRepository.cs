@@ -83,10 +83,11 @@ namespace DAL
 
         public string[] GetCurrentTasksNames(string userName)
         {
-            ApplicationUser user = (ApplicationUser)context.Users.Where(u => u.UserName == userName);
+            ApplicationUser user = (ApplicationUser)context.Users.FirstOrDefault(u => u.UserName == userName);
             string[] result =  context
                         .TaskStudents
                         .Where(ts => ts.ApplicationUserId == user.Id)
+                        .Where(ts => ts.Mark == null)
                         .Select(ts => ts.Task.Name)
                         .ToArray();
 

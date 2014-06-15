@@ -55,7 +55,7 @@ namespace DAL
 
                 context.SaveChanges();
 
-                
+                CreateTasks(context, testUser);
             }
             
         }
