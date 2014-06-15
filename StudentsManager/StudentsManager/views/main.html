@@ -27,6 +27,13 @@
             </div>
         </form>
     </div>
+    <div class="well col-xs-offset-1 col-md-3">
+        <h3>Chat:</h3>
+        <div style="width: 100%; background-color: white;" ng-repeat="message in lastMessages">
+            <div>{{message}}</div>
+        </div> <br />
+        <input type="text" class="form-control" ng-model="currentMessage" ng-enter="addMessage()">
+    </div>
     <div class="well col-md-12">
         <h3>Schedule</h3> <hr />
         <div style="width: 100%; word-wrap: break-word; color: black" ng-bind-html="currentTaskInfo.text"></div>
