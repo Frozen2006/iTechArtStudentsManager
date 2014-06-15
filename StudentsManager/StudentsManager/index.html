@@ -34,7 +34,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" ng-click="selected.value=''" href="/">iTechArt Students Manager</a>
+                <a class="navbar-brand" ng-click="selected.value=''" href="/"><span style="color:red; font-weight: bold;">:i</span><span style="color: white;font-weight: bold;">Tech</span><span style="color: red; font-weight: bold;">Art</span> Students Manager</a>
             </div>
             <div ng-controller="MainCtrl">
                 <div ng-show="isAuthentificated.value">
@@ -92,6 +92,9 @@
     <script src="scripts/controllers/rateStudent.js"></script>
     <script src="scripts/controllers/rateStudentTaskModal.js"></script>
 
+    <script src='https://cdn.firebase.com/js/client/1.0.15/firebase.js'></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js"></script>
+
 
     <script src="scripts/controllers/individualTasks.js"></script>
 
@@ -108,11 +111,17 @@
     </script>
 
 
+
+
+
     <script type="text/ng-template" id="menuTemplate.html">
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li ng-click="selected.value='first'" ng-class="(selected.value == 'first') ? 'active' : ''" id="first">
                     <a href="/Rating">Rating</a>
+                </li>
+                <li>
+                    <a href="/IndividualTasks">MyTasks</a>
                 </li>
                 <li ng-click="selected.value='second'" ng-class="(selected.value === 'second') ? 'active' : ''" id="second">
                     <a href="/Reports">Reports</a>
@@ -124,25 +133,11 @@
                     <a href="/TaskManagment">Task bank</a>
                 </li>
                 <li>
-
                     <a href="/RateStudent">Rate Student</a>
-
-                    <a href="/IndividualTasks">MyTasks</a>
-
                 </li>
-                <li>
-                    <!--
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" id="download">My profile <span class="caret"></span></a>
-                        <ul class="dropdown-menu" aria-labelledby="download">
-                            <li>Logout</li>
-                        </ul>
-                    </li>
-                            -->
-                </li>
+
             </ul>
         </div>
     </script>
 </body>
 </html>
-

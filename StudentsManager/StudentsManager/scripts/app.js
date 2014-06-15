@@ -1,6 +1,6 @@
 'use strict';
 
-var iTechArtStudentsManagerApp = angular.module('iTechArtStudentsManagerApp', ['chartjs-directive', 'ui.bootstrap', 'ngRoute', 'ui.tinymce', 'ngSanitize'])
+var iTechArtStudentsManagerApp = angular.module('iTechArtStudentsManagerApp', ['chartjs-directive', 'ui.bootstrap', 'ngRoute', 'ui.tinymce', 'ngSanitize', "firebase"])
     .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
         $routeProvider
        .when('/', {
