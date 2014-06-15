@@ -103,6 +103,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="scripts\controllers\lectionsViewController.js" />
     <Content Include="scripts\controllers\rateStudent.js" />
     <Content Include="scripts\controllers\rateStudentTaskModal.js" />
     <Content Include="scripts\controllers\scheduleModal.js" />
@@ -404,6 +405,8 @@
     <Content Include="scripts\i18n\angular-locale_zh.js" />
     <Content Include="scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="scripts\i18n\angular-locale_zu.js" />
+    <Content Include="scripts\vendor\pdf.js" />
+    <Content Include="scripts\vendor\pdf.worker.js" />
     <Content Include="scripts\version.json" />
     <Content Include="scripts\errors.json" />
     <Content Include="scripts\angular-touch.min.js.map" />
@@ -705,6 +708,7 @@
     <Content Include="views\main.html" />
     <Content Include="views\modals\rateStudentTaskModal.html" />
     <Content Include="views\modals\scheduleModal.html" />
+    <Content Include="views\partials\lectionsViewPartial.html" />
     <Content Include="views\partials\homePartial.html" />
     <Content Include="views\partials\groupManagmentPartial.html" />
     <Content Include="views\partials\individualTasksPartial.html" />

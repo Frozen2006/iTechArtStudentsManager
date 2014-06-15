@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppLection.cs" />
     <Compile Include="AppUserData.cs" />
     <Compile Include="GroupAssignList.cs" />
     <Compile Include="HomePageData.cs" />
