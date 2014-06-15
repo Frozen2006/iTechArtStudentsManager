@@ -34,5 +34,19 @@ namespace DAL
                     Tag = m.Task.Tags
                 }).ToArray();
         }
+
+
+        public HomePageData GetHomePageData(string userName)
+        {
+            var userGroups = context.Users.FirstOrDefault(m=>m.UserName == userName).Groups;
+
+            return new HomePageData()
+            {
+                CompleatedTasksCount = context.TaskStudents.Where(m => (m.Student.UserName == userName) && (m.Mark != null)).Count(),
+                NewTaskCount = context.TaskStudents.Where(m => (m.Student.UserName == userName) && (m.Mark == null)).Count(),
+                Groups = userGroups.Select(m => m.Name).ToArray(),
+                Schedule = userGroups.Count() > 0 ? userGroups.FirstOrDefault().Schedule : String.Empty
+            };
+        }
     }
 }

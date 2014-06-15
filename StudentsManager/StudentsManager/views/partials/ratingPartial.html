@@ -7,9 +7,9 @@
         <th></th>
         </thead>
         <tbody>
-            <tr ng-repeat="rating in ratings | orderBy:'Mark'">
+            <tr ng-repeat="rating in data.ratings | orderBy:'Mark'">
                 <td>{{$index+1}}</td>
-                <td>{{rating.UserName}}</td>
+                <td>{{rating.LastAndFirstName}}</td>
                 <td>{{rating.Mark}}</td>
             </tr>
         </tbody>

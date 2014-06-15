@@ -1,0 +1,25 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">Rate</h3>
+</div>
+<div class="modal-body">
+    <form>
+        <span class="help-block">Task name: <b ng-bind="task.Title"></b></span></span> <hr />
+        <span class="help-block">Level: <b ng-bind="task.ComplexLevel"></b></span></span> <hr/>
+        <div class="form-group">
+            <label class="control-label">You mark</label>
+            <div class="controls"><input type="range" min="0" max="10" class="form-control" ng-model="mark.val"></div>
+            <span>Value: <b ng-bind="mark.val"></b></span>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Comments</label>
+            <div class="controls"><textarea ui-tinymce class="form-control" ng-model="mark.comment" style="min-height: 350px;"></textarea></div>
+        </div>
+        
+    </form>
+
+    <hr />
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">Save</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

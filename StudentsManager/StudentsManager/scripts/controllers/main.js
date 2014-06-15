@@ -1,6 +1,6 @@
 'use strict';
 
-iTechArtStudentsManagerApp.controller('MainCtrl', ['$rootScope', 'hubProvider', '$location', 'AuthProvider', function ($scope, hubProvider, $location, authProvider) {
+iTechArtStudentsManagerApp.controller('MainCtrl', ['$rootScope', 'hubProvider', '$location', 'AuthProvider','$sce' function ($scope, hubProvider, $location, authProvider, $sce) {
     $scope.isAuthentificated = {
         value: ''
     };
@@ -27,24 +27,22 @@ iTechArtStudentsManagerApp.controller('MainCtrl', ['$rootScope', 'hubProvider', 
         $location.path("/");
     }
 
-  $scope.awesomeThings = [
-    'HTML5 Boilerplate',
-    'AngularJS',
-    'Testacular'
-  ];
-      if (!hubProvider.getHub('serverConnection')) {
-          hubProvider.init(function () {
-              hubProvider.getHub('serverConnection').helloWorld().done(function (data) {
-                  $scope.awesomeThings = data;
-                  $scope.$apply();
-              });
-          });
-      } else {
-          hubProvider.getHub('serverConnection').helloWorld().done(function (data) {
-              $scope.awesomeThings = data;
-              $scope.$apply();
-          });
-      }
+ 
+    $socpe.myData = {
+        CompleatedTasksCount: 0,
+        NewTaskCount: 0,
+        Groups: [],
+        Schedule: '' // $sce.trustAsHtml(taskData);
+    };
 
+    hubProvider.call('serverConnection', 'getHomePageData', window.StudentManager.userName).done(function (data) {
+        $socpe.myData.CompleatedTasksCount = data.CompleatedTasksCount;
+        $socpe.myData.NewTaskCount = data.NewTaskCount;
+        $socpe.myData.Groups = data.Groups;
+        $socpe.myData.Schedule = data.Schedule;
+
+        $scope.$apply();
+        
+    });
 
 }]);

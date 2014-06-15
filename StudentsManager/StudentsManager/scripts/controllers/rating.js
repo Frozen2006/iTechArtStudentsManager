@@ -3,8 +3,9 @@
 iTechArtStudentsManagerApp.controller('RatingCtrl', ['$scope', 'hubProvider', '$filter', function ($scope, hubProvider, $filter) {
     $scope.students = [];
     $scope.averageMarks = [];
-    $scope.ratings = [];
-
+    $scope.data = {
+        ratings: []
+    };
     $scope.sorter = {
         baseField: '',
         info: [],
@@ -31,37 +32,44 @@ iTechArtStudentsManagerApp.controller('RatingCtrl', ['$scope', 'hubProvider', '$
 
     hubProvider.call('serverConnection', 'getStudents').done(function (data) {
         $scope.students = data;
-        $scope.$apply();
+        //$scope.$apply();
+        $scope.showRating();
     });
 
     $scope.showRating = function () {
         var studentsAmount = $scope.students.length;
 
         for (var i = 0; i < studentsAmount; i++) {
-            var marks = getStudentMarks($scope.students[i].UserName);
-            $scope.averageMarks[i] = countAverageMark(marks);
-
-            $scope.ratings[i] = {
-                UserName: $scope.students[i].UserName,
-                Mark: $scope.averageMarks[i]
-            };
+            getStudentMarks($scope.students[i].UserName, i);
             $scope.$apply();
         };
       //  $scope.ratings = [{ UserName: 'asjfa', Mark: 7.0 }, { UserName: 'ureytl', Mark: 6.5 }];
-        $scope.sorter.info = $scope.ratings;
+        $scope.sorter.info = $scope.data.ratings;
+
+        $scope.$apply();
     };
 
-    var getStudentMarks = function (studentName) {
+    var getStudentMarks = function (studentName, i) {
         var marks = [];
-        hubProvider.call('serverConnection', 'getStudentMarks', student.UserName).done(function (data) {
-            marks = data;
+        hubProvider.call('serverConnection', 'getStudentMarks', studentName).done(function (marks) {
+            $scope.averageMarks[i] = countAverageMark(marks);
+
+            $scope.data.ratings[i] = {
+                UserName: $scope.students[i].UserName,
+                LastAndFirstName: $scope.students[i].LastAndFirstName,
+                Mark: $scope.averageMarks[i]
+            };
+            $scope.$apply();
         });
-        return marks;
     };
 
     var countAverageMark = function (marks) {
-        var sum;
+        var sum = 0;
         var marksAmount = marks.length;
+
+        if (marksAmount === 0) {
+            return 0;
+        }
 
         for (var i = 0; i < marksAmount; i++) {
             sum += marks[i].Mark;
