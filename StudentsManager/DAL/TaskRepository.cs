@@ -126,5 +126,35 @@ namespace DAL
 
             context.SaveChanges();
         }
+
+        public string[] GetCurrentTasksNames(string userName)
+        {
+            ApplicationUser user = (ApplicationUser)context.Users.FirstOrDefault(u => u.UserName == userName);
+            string[] result =  context
+                        .TaskStudents
+                        .Where(ts => ts.ApplicationUserId == user.Id)
+                        .Where(ts => ts.Mark == null)
+                        .Select(ts => ts.Task.Name)
+                        .ToArray();
+
+            return result;
+
+             
+        }
+
+        public Models.TaskDispayModel GetTaskDetails(string taskName)
+        {
+            var task = context.Tasks.FirstOrDefault(t => t.Name == taskName);
+            var result = new TaskDispayModel
+            {
+                Title = task.Name,
+                Content = task.Desciption,
+                ComplexLevel = task.Level.ToString(),
+                Tag = task.Tags
+            };
+
+            return result;
+
+        }
     }
 }

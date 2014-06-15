@@ -31,10 +31,17 @@ var iTechArtStudentsManagerApp = angular.module('iTechArtStudentsManagerApp', ['
         templateUrl: 'views/partials/taskBankPartial.html',
         controller: 'TaskBankController'
     })
+
      .when('/RateStudent', {
          templateUrl: 'views/partials/rateStudentPartial.html',
          controller: 'RateStudentController'
      })
+
+    .when('/IndividualTasks', {
+        templateUrl: 'views/partials/individualTasksPartial.html',
+        controller: 'IndividualTasksCtrl'
+    })
+
     .otherwise({
         redirectTo: '/'
     });
