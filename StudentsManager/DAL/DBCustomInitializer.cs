@@ -54,9 +54,72 @@ namespace DAL
                 });
 
                 context.SaveChanges();
+
+                
             }
             
         }
+
+        private void CreateTasks(StudentsManagerDbContext context, ApplicationUser student)
+        {
+            var task1 = new Entities.Task
+            {
+                CreationDate = DateTime.Now,
+                Name = "Task1",
+                Desciption = "This is Task1",
+                Level = 4,
+                Tags = "javascript, html, css"
+            };
+            context.Tasks.Add(task1);
+            
+
+
+            var task2 = new Entities.Task
+            {
+                CreationDate = DateTime.Now,
+                Name = "Task2",
+                Desciption = "This is Task2",
+                Level = 8,
+                Tags = "C#, ASP"
+            };
+            context.Tasks.Add(task2);
+            
+            var task3 = new Entities.Task
+            {
+                CreationDate = DateTime.Now,
+                Name = "Task3",
+                Desciption = "This is Task3",
+                Level = 2,
+                Tags = "reading"
+            };
+            context.Tasks.Add(task3);
+            
+
+            context.SaveChanges();
+
+
+            context.TaskStudents.Add(new TaskStudent
+            {
+                Student = student,
+                Task = task1
+            });
+
+            context.TaskStudents.Add(new TaskStudent
+            {
+                Student = student,
+                Task = task2
+            });
+
+            context.TaskStudents.Add(new TaskStudent
+            {
+                Student = student,
+                Task = task3
+            });
+
+            context.SaveChanges();
+        }
+
+        
 
         
     }

@@ -39,6 +39,7 @@ namespace StudentsManager
         {
             public bool authenticationResult;
             public string message;
+            public string userName;
         }
 
         [WebMethod]
@@ -67,6 +68,7 @@ namespace StudentsManager
                 authenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = true }, identity);
                 result.message = "ok";
                 result.authenticationResult = true;
+                result.userName = User.Identity.Name;
             }
             else
             {

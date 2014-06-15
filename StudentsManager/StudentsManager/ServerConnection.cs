@@ -149,5 +149,30 @@ namespace StudentsManager
         {
             _tasks.AssignTaskToUser(taskTitle, taskTag, userName);
         }
+
+
+        public async Task<string[]> GetCurrentTasksNames(string userName)
+        {
+            string[] tasksNames = null;
+
+            await Task.Run(() =>
+            {
+                tasksNames = _tasks.GetCurrentTasksNames(userName);
+            });
+
+            return tasksNames;
+        }
+
+        public async Task<Models.TaskDispayModel> GetTaskDetails(string taskName)
+        {
+            TaskDispayModel result = null;
+
+            var task = _tasks.GetTaskDetails(taskName);
+
+            return task;
+        }
+
+
+        
     }
 }

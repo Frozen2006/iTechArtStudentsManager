@@ -1,0 +1,16 @@
+﻿<div class="row">
+    <div class="well col-md-3">
+        <h3>Users</h3>
+        <ul ng-repeat="user in users">
+            <li class="categoruItem" ng-click="userClick(group)">{{group}}</li>
+        </ul>
+        <hr>
+        <form>
+            <input type="text" class="form-control" ng-model="newUserName">
+            <input type="text" class="form-control" ng-model="newUserPassword">
+            <br>
+            <a class="btn btn-primary" ng-click="createUser()">Add new user</a>
+        </form>
+    </div>
+    
+</div>

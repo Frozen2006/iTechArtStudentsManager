@@ -18,6 +18,11 @@
                 var response = responseJson.d;
                 if (response.authenticationResult) {
 
+                    if (!window.StudentsManager) {
+                        window.StudentsManager = {};
+                    }
+                    window.StudentsManager.userName = resoinse.userName;
+
                     $scope.message = 'Authenticated...';
                     $scope.$apply();
 
