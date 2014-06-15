@@ -1,4 +1,4 @@
-﻿iTechArtStudentsManagerApp.controller('LoginCtrl', ['$scope', '$rootScope', 'AuthProvider', '$location', function ($scope, $rootScope, authProvider, $location) {
+﻿iTechArtStudentsManagerApp.controller('LoginCtrl', ['$scope', '$rootScope', 'AuthProvider', '$location', 'AuthProvider', function ($scope, $rootScope, authProvider, $location, AuthProvider) {
     $scope.login = '';
     $scope.pass = '';
     $scope.message = ''
@@ -14,6 +14,7 @@
             data: "{'username':'" + $scope.login + "', 'passwordHash':'" + $scope.pass + "'}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
+            cache: false,
             success: function OnSuccessCall(responseJson) {
                 var response = responseJson.d;
                 if (response.authenticationResult) {
@@ -21,7 +22,13 @@
                     if (!window.StudentsManager) {
                         window.StudentsManager = {};
                     }
+
+                    AuthProvider.setUserData(response.userName, response.userRole);
                     window.StudentsManager.userName = response.userName;
+
+                    if (response.userRole !== "Teacher") {
+                        $(".teacher").hide();
+                    }
 
                     $scope.message = 'Authenticated...';
                     $scope.$apply();

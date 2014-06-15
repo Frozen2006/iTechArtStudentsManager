@@ -140,6 +140,11 @@ iTechArtStudentsManagerApp.provider('AuthProvider', function () {
     var isAuthorized = false;
     var self = this;
 
+    var StudentsManager = {
+        userName: '',
+        userRole: ''
+    }
+
     this.$get = function () {
         return {
             isAuthorized: function () {
@@ -153,6 +158,13 @@ iTechArtStudentsManagerApp.provider('AuthProvider', function () {
             },
             subscribe: function (callback) {
 
+            },
+            setUserData: function (userName, userRole) {
+                StudentsManager.userName = userName;
+                StudentsManager.userRole = userRole;
+            },
+            getUserData: function () {
+                return StudentsManager;
             }
         };
     };

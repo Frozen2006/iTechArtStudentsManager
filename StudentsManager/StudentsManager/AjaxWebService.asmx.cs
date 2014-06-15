@@ -40,6 +40,7 @@ namespace StudentsManager
             public bool authenticationResult;
             public string message;
             public string userName;
+            public string userRole;
         }
 
         [WebMethod]
@@ -69,6 +70,7 @@ namespace StudentsManager
                 result.message = "ok";
                 result.authenticationResult = true;
                 result.userName = User.Identity.Name;
+                result.userRole = User.IsInRole("Student") ? "Student" : "Teacher";
             }
             else
             {
