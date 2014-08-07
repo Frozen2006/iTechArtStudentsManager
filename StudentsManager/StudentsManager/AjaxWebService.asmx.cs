@@ -53,6 +53,7 @@ namespace StudentsManager
             var userManager = new ApplicationUserManager<ApplicationUser>();
 
             var userByName = userManager.FindByName(username);
+
             ApplicationUser userByPassword = null;
             if (userByName != null)
             {
