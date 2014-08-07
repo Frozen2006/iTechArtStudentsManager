@@ -59,7 +59,7 @@ namespace StudentsManager
             {
                 userByPassword = userManager.Find(username, passwordHash);
             }
-
+       
 
             if (userByPassword != null)
             {
@@ -85,6 +85,42 @@ namespace StudentsManager
             
         }
 
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public LoginResult IsAuntificated()
+        {
+            LoginResult result = new LoginResult();
+            if(User.Identity.IsAuthenticated)
+            {
+                result.message = "ok";
+                result.authenticationResult = true;
+                result.userName = User.Identity.Name;
+                result.userRole = User.IsInRole("Student") ? "Student" : "Teacher";
+            }
+
+            return result;
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string LogOut()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
+                authenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+            }
+
+
+            HttpCookie currentUserCookie = HttpContext.Current.Request.Cookies[".AspNet.ApplicationCookie"];
+            HttpContext.Current.Response.Cookies.Remove(".AspNet.ApplicationCookie");
+            currentUserCookie.Expires = DateTime.Now.AddDays(-10);
+            currentUserCookie.Value = null;
+            HttpContext.Current.Response.SetCookie(currentUserCookie);
+
+
+            return "";
+        }
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]

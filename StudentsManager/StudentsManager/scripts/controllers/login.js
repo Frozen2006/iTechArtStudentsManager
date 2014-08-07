@@ -38,7 +38,7 @@
                     $location.path("/");
                     $rootScope.$apply();
                     
-
+                    $(".navbar-nav").show();
                     //getRoleName();
                 } else {
                     $scope.message = 'Authentication failed.';

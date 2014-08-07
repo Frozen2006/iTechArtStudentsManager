@@ -143,15 +143,76 @@ iTechArtStudentsManagerApp.provider('hubProvider', function () {
 
 iTechArtStudentsManagerApp.provider('AuthProvider', function () {
     var isAuthorized = false;
+    var _isAuntificationChecked = false;
     var self = this;
+
 
     var StudentsManager = {
         userName: '',
         userRole: ''
     }
 
+    var serviceUrl = "AjaxWebService.asmx";
+
+    var checkAuth = function () {
+        var deffered = new $.Deferred;
+
+        $.ajax({
+            type: "POST",
+            url: serviceUrl + "/IsAuntificated?antiChache=" + Math.floor(Math.random() * 10000),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            cache: false,
+            success: function OnSuccessCall(responseJson) {
+                _isAuntificationChecked = true;
+                var response = responseJson.d;
+                if (response.authenticationResult) {
+                    StudentsManager.userName = response.userName;
+                    StudentsManager.userRole = response.userRole;
+
+                    window.StudentsManager = window.StudentsManager || {};
+                    window.StudentsManager.userName = response.userName;
+
+                    if (response.userRole !== "Teacher") {
+                        $(".teacher").hide();
+                    }
+                    //getRoleName();
+                    //$location.path("/");
+                    isAuthorized = true;
+                    deffered.resolve(true);
+                }
+                deffered.resolve(false);
+            }
+        });
+
+        return deffered.promise();
+    };
+
+    var makeLogOut = function () {
+        $.ajax({
+            type: "POST",
+            url: serviceUrl + "/LogOut?antiChache=" + Math.floor(Math.random() * 10000),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            cache: false
+        });
+    };
+    
+
     this.$get = function () {
         return {
+            tryAuthorize: function () {
+                var deffered = new $.Deferred;
+                //return isAuthorized;
+                if (_isAuntificationChecked) {
+                    deffered.resolve(isAuthorized);
+                } else {
+                    checkAuth().done(function (data) {
+                        deffered.resolve(data);
+                    });
+                }
+                return deffered.promise();
+            },
             isAuthorized: function () {
                 return isAuthorized;
             },
@@ -160,6 +221,7 @@ iTechArtStudentsManagerApp.provider('AuthProvider', function () {
             },
             logOut: function () {
                 isAuthorized = false;
+                makeLogOut();
             },
             subscribe: function (callback) {
 

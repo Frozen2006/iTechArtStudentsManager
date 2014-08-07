@@ -2,11 +2,20 @@
 
 iTechArtStudentsManagerApp.controller('MainCtrl', ['$rootScope', 'hubProvider', '$location', 'AuthProvider', '$sce', '$firebase', function ($scope, hubProvider, $location, authProvider, $sce, $firebase) {
     $scope.isAuthentificated = {
-        value: ''
+        value: authProvider.isAuthorized()
     };
 
     $scope.selected = {
         value: ''
+    };
+
+    $scope.userName = {
+        value: ''
+    };
+
+    if (authProvider.isAuthorized()) {
+        var userData = authProvider.getUserData();
+        $scope.userName.value = userData.userName;
     };
 
     $scope.$watch('isAuthentificated.value', function (newValue, oldValue) {
@@ -16,13 +25,25 @@ iTechArtStudentsManagerApp.controller('MainCtrl', ['$rootScope', 'hubProvider', 
                 $location.path("/Login");
             }
             else {
+                var userData = authProvider.getUserData();
+                $scope.userName.value = userData.userName;
                 $location.path("/");
             }
         }
     }, true);
 
+    $scope.logout = function () {
+        authProvider.logOut();
+        $(".navbar-nav").hide();
+        $location.path("/Login");
+    };
+    //
 
-    $scope.isAuthentificated.value = authProvider.isAuthorized();
+    if (!$scope.isAuthentificated.value) {
+        authProvider.tryAuthorize().done(function (data) {
+            $scope.isAuthentificated.value = data;
+        });
+    }
 
     if ((typeof $scope.isAuthentificated !== 'undefined') && (!$scope.isAuthentificated.value)) {
         $location.path("/Login");
